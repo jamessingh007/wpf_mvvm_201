@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InstituteModelStoreContainer" CdmEntityContainer="InstituteContext">
+    <EntitySetMapping Name="BATCHes">
+      <EntityTypeMapping TypeName="InstituteModel.BATCH">
+        <MappingFragment StoreEntitySet="BATCH">
+          <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+          <ScalarProperty Name="BatchStartDate" ColumnName="BatchStartDate" />
+          <ScalarProperty Name="BatchEndDate" ColumnName="BatchEndDate" />
+          <ScalarProperty Name="Stream" ColumnName="Stream" />
+          <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FACULTies">
+      <EntityTypeMapping TypeName="InstituteModel.FACULTY">
+        <MappingFragment StoreEntitySet="FACULTY">
+          <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+          <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Experience" ColumnName="Experience" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PARTICIPANTs">
+      <EntityTypeMapping TypeName="InstituteModel.PARTICIPANT">
+        <MappingFragment StoreEntitySet="PARTICIPANT">
+          <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+          <ScalarProperty Name="ParticipantName" ColumnName="ParticipantName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+          <ScalarProperty Name="CourseRegistered" ColumnName="CourseRegistered" />
+          <ScalarProperty Name="DateofRegistration" ColumnName="DateofRegistration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

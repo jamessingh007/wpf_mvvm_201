@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InstituteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BATCH">
+    <Key>
+      <PropertyRef Name="BatchID" />
+    </Key>
+    <Property Name="BatchID" Type="int" Nullable="false" />
+    <Property Name="BatchStartDate" Type="date" />
+    <Property Name="BatchEndDate" Type="date" />
+    <Property Name="Stream" Type="varchar" MaxLength="100" />
+    <Property Name="FacultyID" Type="int" />
+  </EntityType>
+  <EntityType Name="FACULTY">
+    <Key>
+      <PropertyRef Name="FacultyID" />
+    </Key>
+    <Property Name="FacultyID" Type="int" Nullable="false" />
+    <Property Name="FacultyName" Type="varchar" MaxLength="100" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="Experience" Type="int" />
+    <Property Name="Qualification" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PARTICIPANT">
+    <Key>
+      <PropertyRef Name="ParticipantID" />
+    </Key>
+    <Property Name="ParticipantID" Type="int" Nullable="false" />
+    <Property Name="ParticipantName" Type="varchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="BatchID" Type="int" />
+    <Property Name="CourseRegistered" Type="varchar" MaxLength="50" />
+    <Property Name="DateofRegistration" Type="date" />
+  </EntityType>
+  <Association Name="FK_BATCH_PARTICIPANT">
+    <End Role="BATCH" Type="Self.BATCH" Multiplicity="0..1" />
+    <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BATCH">
+        <PropertyRef Name="BatchID" />
+      </Principal>
+      <Dependent Role="PARTICIPANT">
+        <PropertyRef Name="BatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatchFaculty">
+    <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="0..1" />
+    <End Role="BATCH" Type="Self.BATCH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACULTY">
+        <PropertyRef Name="FacultyID" />
+      </Principal>
+      <Dependent Role="BATCH">
+        <PropertyRef Name="FacultyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InstituteModelStoreContainer">
+    <EntitySet Name="BATCH" EntityType="Self.BATCH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACULTY" EntityType="Self.FACULTY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PARTICIPANT" EntityType="Self.PARTICIPANT" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BATCH_PARTICIPANT" Association="Self.FK_BATCH_PARTICIPANT">
+      <End Role="BATCH" EntitySet="BATCH" />
+      <End Role="PARTICIPANT" EntitySet="PARTICIPANT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatchFaculty" Association="Self.FK_BatchFaculty">
+      <End Role="FACULTY" EntitySet="FACULTY" />
+      <End Role="BATCH" EntitySet="BATCH" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

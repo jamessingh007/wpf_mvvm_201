@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="Training" Height="auto" Width="auto">
+    <Grid Height="auto" Width="auto">
+        <TabControl HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="auto">
+            <TabItem Header="Faculty">
+                <Grid Background="#FFE5E5E5" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Button x:Name="btnAddFaculty" Content="Add Faculty" HorizontalAlignment="Left" Margin="47,37,47,47" VerticalAlignment="Top" Width="194" Command="{Binding Navigate}"/>
+                    <Button x:Name="btnSearchFaculty" Content="Search Faculty" HorizontalAlignment="Left" Margin="47,79,47,47" VerticalAlignment="Top" Width="194"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Batch">
+                <Grid Background="#FFE5E5E5" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid Background="#FFE5E5E5" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Button Content="Add Batch" HorizontalAlignment="Left" Margin="27,37,0,0" VerticalAlignment="Top" Width="194" Grid.ColumnSpan="2" Grid.Column="1"/>
+                        <Button Content="Search Batch" HorizontalAlignment="Left" Margin="27,79,0,0" VerticalAlignment="Top" Width="194" Grid.ColumnSpan="2" Grid.Column="1"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Participant">
+                <Grid Background="#FFE5E5E5" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid Background="#FFE5E5E5" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Button Content="Add Participant" HorizontalAlignment="Left" Margin="47,37,0,0" VerticalAlignment="Top" Width="194"/>
+                        <Button Content="Search Participant" HorizontalAlignment="Left" Margin="47,79,0,0" VerticalAlignment="Top" Width="194"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

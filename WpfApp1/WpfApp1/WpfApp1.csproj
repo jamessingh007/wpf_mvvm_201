@@ -96,6 +96,9 @@
     <Compile Include="Views\AddFacultyView.xaml.cs">
       <DependentUpon>AddFacultyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SearchFacultyView.xaml.cs">
+      <DependentUpon>SearchFacultyView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -113,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddFacultyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchFacultyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

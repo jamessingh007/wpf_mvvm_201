@@ -24,3 +24,31 @@ D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\AddFacultyV
 D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\UserControls\AddFacultyUC.g.cs
 D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\UserControls\AddFacultyUC.baml
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\bin\Debug\WpfApp1.exe.config
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\bin\Debug\WpfApp1.exe
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\bin\Debug\WpfApp1.pdb
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\bin\Debug\EntityFramework.dll
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\bin\Debug\EntityFramework.xml
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csprojAssemblyReference.cache
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\MainWindow.g.cs
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\UserControls\AddFacultyUC.g.cs
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\AddFacultyView.g.cs
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\App.g.cs
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1_Content.g.cs
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\MainWindow.baml
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\UserControls\AddFacultyUC.baml
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\AddFacultyView.baml
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.g.resources
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.GenerateResource.cache
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.CoreCompileInputs.cache
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.CopyComplete
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.exe
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.pdb
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchFacultyView.g.cs
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchFacultyView.baml
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\GeneratedInternalTypeHelper.g.cs

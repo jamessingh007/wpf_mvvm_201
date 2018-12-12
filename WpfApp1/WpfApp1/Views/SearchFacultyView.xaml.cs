@@ -16,14 +16,15 @@ using WpfApp1.ViewModels;
 namespace WpfApp1.Views
 {
     /// <summary>
-    /// Interaction logic for AddFacultyView.xaml
+    /// Interaction logic for SearchFacultyView.xaml
     /// </summary>
-    public partial class AddFacultyView : Window
+    public partial class SearchFacultyView : Window
     {
-        public AddFacultyView()
+        public SearchFacultyView()
         {
             InitializeComponent();
-            //this.DataContext = new FacultyViewModel();
+            FacultyViewModel fvm = new FacultyViewModel();
+            this.DataContext = fvm;
         }
     }
 }

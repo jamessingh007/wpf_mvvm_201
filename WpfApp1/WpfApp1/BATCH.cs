@@ -10,14 +10,14 @@
 namespace WpfApp1
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class BATCH
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BATCH()
         {
-            this.PARTICIPANTs = new HashSet<PARTICIPANT>();
+            this.PARTICIPANTs = new ObservableCollection<PARTICIPANT>();
         }
     
         public int BatchID { get; set; }
@@ -27,7 +27,7 @@ namespace WpfApp1
         public Nullable<int> FacultyID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PARTICIPANT> PARTICIPANTs { get; set; }
+        public virtual ObservableCollection<PARTICIPANT> PARTICIPANTs { get; set; }
         public virtual FACULTY FACULTY { get; set; }
     }
 }

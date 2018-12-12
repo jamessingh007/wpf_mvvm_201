@@ -7,92 +7,81 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
-namespace WpfApp1
+namespace WpfApp1.ViewModels
 {
-    public class FacultyViewModel : INotifyPropertyChanged
+    public class FacultyViewModel
     {
-        /*
-        private FACULTY objFaculty = new FACULTY();
+        TrainingContext _dbcontext = new TrainingContext();
 
-        public int FacultyID {
-            get
-            {
-                return objFaculty.FacultyID;
-            }
-            set
-            {
-                objFaculty.FacultyID = value;
-            }
+        private ObservableCollection<FacultyVM> _Faculties;
+        public FacultyViewModel()
+        {
+            //_Faculties = new ObservableCollection<FacultyVM>
+            //{
+            //    new FacultyVM{FacultyID = 1,FacultyName="Raj",DateOfBirth="2012/02/01",Experience=3,Qualification="DEL"},
+            //    new FacultyVM{FacultyID=2,FacultyName="Mark",DateOfBirth="2012/02/01",Experience=5, Qualification="NY"},
+            //    new FacultyVM{FacultyID=3,FacultyName="Mahesh",DateOfBirth="2012/02/01",Experience=4, Qualification="PHL"},
+            //    new FacultyVM{FacultyID=4,FacultyName="Vikash",DateOfBirth="2012/02/01",Experience=6, Qualification="UP"},
+            //    new FacultyVM{FacultyID=5,FacultyName="Harsh",DateOfBirth="2012/02/01",Experience=2, Qualification="UP"},
+            //    new FacultyVM{FacultyID=6,FacultyName="Reetesh",DateOfBirth="2012/02/01",Experience=1, Qualification="MP"},
+            //    new FacultyVM{FacultyID=7,FacultyName="Deven",DateOfBirth="2012/02/01",Experience=3, Qualification="HP"},
+            //    new FacultyVM{FacultyID=8,FacultyName="Ravi",DateOfBirth="2012/02/01",Experience=4, Qualification="DEL"}
+            //};
+            GetData();
         }
-        public String FacultyName
+        public ObservableCollection<FacultyVM> Faculties
+        {
+            get { return _Faculties; }
+            set { _Faculties = value; }
+        }
+
+        protected void GetData()
+        {
+            ObservableCollection<FacultyVM> _faculty = new ObservableCollection<FacultyVM>();
+            var faculties = (from p in _dbcontext.FACULTies
+                                  select p).ToList();
+            foreach (FACULTY prod in faculties)
+            {
+                _faculty.Add(new FacultyVM {objFaculty = prod });
+            }
+            Faculties = _faculty;
+        }
+        private ICommand mUpdater;
+        public ICommand UpdateCommand
         {
             get
             {
-                return objFaculty.FacultyName;
+                if (mUpdater == null)
+                    mUpdater = new Updater();
+                return mUpdater;
             }
             set
             {
-                objFaculty.FacultyName = value;
+                mUpdater = value;
             }
         }
-        public string DateOfBirth
+
+        private class Updater : ICommand
         {
-            get
+            #region ICommand Members
+
+            public bool CanExecute(object parameter)
             {
-                return objFaculty.DateOfBirth.ToString();
+                return true;
             }
-            set
+
+            public event EventHandler CanExecuteChanged;
+
+            public void Execute(object parameter)
             {
-                objFaculty.DateOfBirth = Convert.ToDateTime(value);
+
             }
+
+            #endregion
         }
-        public int Experience
-        {
-            get
-            {
-                return Convert.ToInt16(objFaculty.Experience);
-            }
-            set
-            {
-                objFaculty.Experience = value;
-            }
-        }
-        public String Qualification
-        {
-            get
-            {
-                return objFaculty.Qualification;
-            }
-            set
-            {
-                objFaculty.Qualification = value;
-            }
-        }
-        */
-
-        protected TrainingContext db = new TrainingContext();
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public ObservableCollection<FacultyVM> Faculties { get; set; }
-
-        protected void GetFaculty()
-        {
-            ObservableCollection<FacultyVM> _faculties = new ObservableCollection<FacultyVM>();
-            var faculties = (from f in db.FACULTies
-                             select f).ToList();
-            foreach(FACULTY faculty in faculties)
-            {
-                _faculties.Add(new FacultyVM { TheFaculty = faculty});
-            }
-            Faculties = _faculties;
-        }
-
-
-        public FacultyViewModel() :base()
-        {
-
-        }
+        
     }
 }

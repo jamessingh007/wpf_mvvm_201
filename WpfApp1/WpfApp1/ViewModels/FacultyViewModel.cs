@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 //using WpfApp1.ViewModels.DTO;
 using System.Data.Entity;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace WpfApp1
 {
-    public class FacultyViewModel
+    public class FacultyViewModel : INotifyPropertyChanged
     {
         /*
         private FACULTY objFaculty = new FACULTY();
@@ -70,7 +71,25 @@ namespace WpfApp1
         }
         */
 
+        protected TrainingContext db = new TrainingContext();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ObservableCollection<FacultyVM> Faculties { get; set; }
+
+        protected void GetFaculty()
+        {
+            ObservableCollection<FacultyVM> _faculties = new ObservableCollection<FacultyVM>();
+            var faculties = (from f in db.FACULTies
+                             select f).ToList();
+            foreach(FACULTY faculty in faculties)
+            {
+                _faculties.Add(new FacultyVM { TheFaculty = faculty});
+            }
+            Faculties = _faculties;
+        }
+
+
         public FacultyViewModel() :base()
         {
 

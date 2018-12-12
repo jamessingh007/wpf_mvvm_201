@@ -14,5 +14,6 @@ namespace WpfApp1
         {
             TheFaculty = new FACULTY();
         }
+
     }
 }

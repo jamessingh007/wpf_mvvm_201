@@ -52,3 +52,5 @@ C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.pdb
 C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchFacultyView.g.cs
 C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchFacultyView.baml
 C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchFacultyView.g.cs
+D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchFacultyView.baml

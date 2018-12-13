@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using WpfApp1.Views;
 
 namespace WpfApp1.ViewModels
 {
@@ -19,18 +20,8 @@ namespace WpfApp1.ViewModels
         private ObservableCollection<FacultyVM> _Faculties;
         public FacultyViewModel()
         {
-            //_Faculties = new ObservableCollection<FacultyVM>
-            //{
-            //    new FacultyVM{FacultyID = 1,FacultyName="Raj",DateOfBirth="2012/02/01",Experience=3,Qualification="DEL"},
-            //    new FacultyVM{FacultyID=2,FacultyName="Mark",DateOfBirth="2012/02/01",Experience=5, Qualification="NY"},
-            //    new FacultyVM{FacultyID=3,FacultyName="Mahesh",DateOfBirth="2012/02/01",Experience=4, Qualification="PHL"},
-            //    new FacultyVM{FacultyID=4,FacultyName="Vikash",DateOfBirth="2012/02/01",Experience=6, Qualification="UP"},
-            //    new FacultyVM{FacultyID=5,FacultyName="Harsh",DateOfBirth="2012/02/01",Experience=2, Qualification="UP"},
-            //    new FacultyVM{FacultyID=6,FacultyName="Reetesh",DateOfBirth="2012/02/01",Experience=1, Qualification="MP"},
-            //    new FacultyVM{FacultyID=7,FacultyName="Deven",DateOfBirth="2012/02/01",Experience=3, Qualification="HP"},
-            //    new FacultyVM{FacultyID=8,FacultyName="Ravi",DateOfBirth="2012/02/01",Experience=4, Qualification="DEL"}
-            //};
             GetData();
+
         }
         public ObservableCollection<FacultyVM> Faculties
         {
@@ -41,33 +32,41 @@ namespace WpfApp1.ViewModels
         protected void GetData()
         {
             ObservableCollection<FacultyVM> _faculty = new ObservableCollection<FacultyVM>();
-            var faculties = (from p in _dbcontext.FACULTies
-                                  select p).ToList();
+            var faculties = _dbcontext.FACULTies.Take(5).OrderByDescending(o => o.FacultyID).ToList();
             foreach (FACULTY prod in faculties)
             {
-                _faculty.Add(new FacultyVM {objFaculty = prod });
+                _faculty.Add(new FacultyVM { objFaculty = prod });
             }
             Faculties = _faculty;
         }
+
+        private void SaveFacultyChanges()
+        {
+
+            _dbcontext.SaveChanges(); 
+        }
+
         private ICommand mUpdater;
-        public ICommand UpdateCommand
+        public ICommand SaveFacultyCommand
         {
             get
             {
                 if (mUpdater == null)
-                    mUpdater = new Updater();
+                    mUpdater = new RelayCommand(SaveFacultyChanges);
                 return mUpdater;
             }
-            set
-            {
-                mUpdater = value;
-            }
+
         }
 
-        private class Updater : ICommand
+        public class RelayCommand : ICommand
         {
             #region ICommand Members
 
+            private Action _action;
+            public RelayCommand(Action action)
+            {
+                _action = action;
+            }
             public bool CanExecute(object parameter)
             {
                 return true;
@@ -77,11 +76,10 @@ namespace WpfApp1.ViewModels
 
             public void Execute(object parameter)
             {
-
+                _action();
             }
 
             #endregion
         }
-        
     }
 }

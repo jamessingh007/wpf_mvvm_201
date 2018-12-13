@@ -10,8 +10,12 @@
         <TabControl HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="auto">
             <TabItem Header="Faculty">
                 <Grid Background="#FFE5E5E5" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Button x:Name="btnAddFaculty" Content="Add Faculty" HorizontalAlignment="Left" Margin="47,37,47,47" VerticalAlignment="Top" Width="194" Command="{Binding Navigate}"/>
-                    <Button x:Name="btnSearchFaculty" Content="Search Faculty" HorizontalAlignment="Left" Margin="47,79,47,47" VerticalAlignment="Top" Width="194"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="17*"/>
+                        <ColumnDefinition Width="55*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnAddFaculty" Content="Add Faculty" HorizontalAlignment="Left" Margin="47,37,0,0" VerticalAlignment="Top" Width="194" Command="{Binding Navigate}" Grid.ColumnSpan="2"/>
+                    <Button x:Name="btnSearchFaculty" Content="Search Faculty" HorizontalAlignment="Left" Margin="47,79,0,0" VerticalAlignment="Top" Width="194" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Batch">

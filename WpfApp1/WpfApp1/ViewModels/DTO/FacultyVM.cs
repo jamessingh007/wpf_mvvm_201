@@ -10,6 +10,7 @@ namespace WpfApp1.ViewModels
     public class FacultyVM : INotifyPropertyChanged
     {
         public FACULTY objFaculty;
+        public FacultyVM objFacultyVM;
 
         public FacultyVM()
         {
@@ -36,6 +37,7 @@ namespace WpfApp1.ViewModels
             set
             {
                 objFaculty.FacultyName = value;
+                OnPropertyChanged("FacultyName");
             }
         }
         public string DateOfBirth
@@ -47,6 +49,7 @@ namespace WpfApp1.ViewModels
             set
             {
                 objFaculty.DateOfBirth = Convert.ToDateTime(value);
+                OnPropertyChanged("DateOfBirth");
             }
         }
         public int Experience
@@ -58,6 +61,7 @@ namespace WpfApp1.ViewModels
             set
             {
                 objFaculty.Experience = value;
+                OnPropertyChanged("Experience");
             }
         }
         public String Qualification
@@ -69,6 +73,7 @@ namespace WpfApp1.ViewModels
             set
             {
                 objFaculty.Qualification = value;
+                OnPropertyChanged("Qualification");
             }
         }
 

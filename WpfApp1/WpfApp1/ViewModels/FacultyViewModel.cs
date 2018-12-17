@@ -13,10 +13,10 @@ using WpfApp1.Views;
 
 namespace WpfApp1.ViewModels
 {
-    public class FacultyViewModel
+    public class FacultyViewModel : FacultyVM
     {
         TrainingContext _dbcontext = new TrainingContext();
-
+        public FACULTY SelectedFaculty { get; set; }
         private ObservableCollection<FacultyVM> _Faculties;
         public FacultyViewModel()
         {
@@ -40,20 +40,41 @@ namespace WpfApp1.ViewModels
             Faculties = _faculty;
         }
 
-        private void SaveFacultyChanges()
+        private void UpdateFacultyChanges()
         {
-
             _dbcontext.SaveChanges(); 
         }
 
-        private ICommand mUpdater;
-        public ICommand SaveFacultyCommand
+        private ICommand Update;
+        public ICommand UpdateFacultyCommand
         {
             get
             {
-                if (mUpdater == null)
-                    mUpdater = new RelayCommand(SaveFacultyChanges);
-                return mUpdater;
+                if (Update == null)
+                    Update = new RelayCommand(UpdateFacultyChanges);
+                return Update;
+            }
+
+        }
+
+        private void DeleteFaculty()
+        {
+            int id = SelectedFaculty.FacultyID;
+            var faculty = (from f in _dbcontext.FACULTies
+                          where f.FacultyID == id
+                          select f).SingleOrDefault();
+            _dbcontext.FACULTies.Remove(faculty);
+            _dbcontext.SaveChanges();
+            
+        }
+        private ICommand Delete;
+        public ICommand DeleteFacultyCommand
+        {
+            get
+            {
+                if (Delete == null)
+                    Delete = new RelayCommand(DeleteFaculty);
+                return Delete;
             }
 
         }

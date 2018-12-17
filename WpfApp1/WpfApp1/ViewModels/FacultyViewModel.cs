@@ -16,23 +16,36 @@ namespace WpfApp1.ViewModels
     public class FacultyViewModel : FacultyVM
     {
         TrainingContext _dbcontext = new TrainingContext();
-        public FACULTY SelectedFaculty { get; set; }
+        public FacultyVM SelectedFaculty
+        {
+            get;
+            set;
+        }
+
         private ObservableCollection<FacultyVM> _Faculties;
         public FacultyViewModel()
         {
             GetData();
 
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ObservableCollection<FacultyVM> Faculties
         {
+            //get;set;
             get { return _Faculties; }
             set { _Faculties = value; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected void GetData()
         {
             ObservableCollection<FacultyVM> _faculty = new ObservableCollection<FacultyVM>();
-            var faculties = _dbcontext.FACULTies.Take(5).OrderByDescending(o => o.FacultyID).ToList();
+            var faculties = _dbcontext.FACULTies.Take(10).OrderByDescending(o => o.FacultyID).ToList();
             foreach (FACULTY prod in faculties)
             {
                 _faculty.Add(new FacultyVM { objFaculty = prod });
@@ -40,11 +53,17 @@ namespace WpfApp1.ViewModels
             Faculties = _faculty;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateFacultyChanges()
         {
             _dbcontext.SaveChanges(); 
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private ICommand Update;
         public ICommand UpdateFacultyCommand
         {
@@ -59,14 +78,19 @@ namespace WpfApp1.ViewModels
 
         private void DeleteFaculty()
         {
-            int id = SelectedFaculty.FacultyID;
-            var faculty = (from f in _dbcontext.FACULTies
-                          where f.FacultyID == id
-                          select f).SingleOrDefault();
-            _dbcontext.FACULTies.Remove(faculty);
-            _dbcontext.SaveChanges();
+            if(SelectedFaculty != null)
+            {
+                _dbcontext.FACULTies.Remove(SelectedFaculty.objFaculty);
+                Faculties.Remove(SelectedFaculty);
+                _dbcontext.SaveChanges();
+            }
+            
             
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private ICommand Delete;
         public ICommand DeleteFacultyCommand
         {
@@ -79,6 +103,9 @@ namespace WpfApp1.ViewModels
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public class RelayCommand : ICommand
         {
             #region ICommand Members

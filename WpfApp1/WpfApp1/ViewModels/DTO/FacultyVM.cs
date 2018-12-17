@@ -12,6 +12,7 @@ namespace WpfApp1.ViewModels
         public FACULTY objFaculty;
         public FacultyVM objFacultyVM;
 
+
         public FacultyVM()
         {
             objFaculty = new FACULTY();

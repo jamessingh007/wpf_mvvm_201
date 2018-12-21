@@ -7,13 +7,11 @@ using System.ComponentModel;
 
 namespace WpfApp1.ViewModels
 {
-    public class FacultyVM : INotifyPropertyChanged
+    public class Faculty : INotifyPropertyChanged
     {
         public FACULTY objFaculty;
-        public FacultyVM objFacultyVM;
-
-
-        public FacultyVM()
+        
+        public Faculty()
         {
             objFaculty = new FACULTY();
         }

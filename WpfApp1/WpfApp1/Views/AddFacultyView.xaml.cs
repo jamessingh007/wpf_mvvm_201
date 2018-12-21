@@ -25,6 +25,7 @@ namespace WpfApp1.Views
             InitializeComponent();
             FacultyViewModel fvm = new FacultyViewModel();
             this.DataContext = fvm;
+            
         }
     }
 }

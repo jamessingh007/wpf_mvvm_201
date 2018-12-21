@@ -10,46 +10,71 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using WpfApp1.Views;
+using System.Windows;
+
+
 
 namespace WpfApp1.ViewModels
 {
-    public class FacultyViewModel : FacultyVM
+    public class FacultyViewModel : Faculty
     {
         TrainingContext _dbcontext = new TrainingContext();
-        public FacultyVM SelectedFaculty
+        public Faculty SelectedFaculty
         {
             get;
             set;
         }
 
-        private ObservableCollection<FacultyVM> _Faculties;
+
         public FacultyViewModel()
         {
             GetData();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public ObservableCollection<FacultyVM> Faculties
+        private ObservableCollection<Faculty> _Faculties = new ObservableCollection<Faculty>();
+        public ObservableCollection<Faculty> Faculties
         {
             //get;set;
             get { return _Faculties; }
             set { _Faculties = value; }
         }
 
+        private Faculty _newFaculty = new Faculty();
+        public Faculty newFaculty
+        {
+            get { return _newFaculty; }
+            set { _newFaculty = value; }
+        }
+
         /// <summary>
         /// 
         /// </summary>
         protected void GetData()
-        {
-            ObservableCollection<FacultyVM> _faculty = new ObservableCollection<FacultyVM>();
+        {   
+            if (_Faculties.Count > 0)
+            {
+                _Faculties.Clear();
+            }
             var faculties = _dbcontext.FACULTies.Take(10).OrderByDescending(o => o.FacultyID).ToList();
             foreach (FACULTY prod in faculties)
             {
-                _faculty.Add(new FacultyVM { objFaculty = prod });
+                _Faculties.Add(new Faculty { objFaculty = prod });
             }
-            Faculties = _faculty;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected int GenerateFacultyID()
+        {
+            int fid=0;
+            if (_Faculties.Count > 0)
+            {
+                fid = _Faculties.First().FacultyID;
+            }
+            fid++;
+            return fid;
         }
 
         /// <summary>
@@ -57,7 +82,7 @@ namespace WpfApp1.ViewModels
         /// </summary>
         private void UpdateFacultyChanges()
         {
-            _dbcontext.SaveChanges(); 
+            _dbcontext.SaveChanges();
         }
 
         /// <summary>
@@ -75,25 +100,24 @@ namespace WpfApp1.ViewModels
 
         }
 
-        //private ICommand Search;
-        //public ICommand SearchFacultyCommand
-        //{
-        //    get
-        //    {
-        //        if (Search == null)
-        //            Search = new RelayCommand(param => this.SearchFaculty(1));
-        //        return Search;
-        //    }
+        private ICommand Search;
+        public ICommand SearchFacultyCommand
+        {
+            get
+            {
+                if (Search == null)
+                    Search = new RelayCommand(SearchFaculty);
+                return Search;
+            }
 
-        //}
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="facultyID"></param>
-        private void SearchFaculty(int facultyID)
+        private void SearchFaculty()
         {
-            
+
         }
 
         private ICommand Add;
@@ -112,6 +136,15 @@ namespace WpfApp1.ViewModels
         /// </summary>
         private void AddFaculty()
         {
+            FACULTY _newFaculty = new FACULTY();
+            _newFaculty.FacultyID = GenerateFacultyID();
+            _newFaculty.FacultyName = FacultyName;
+            _newFaculty.DateOfBirth = DateTime.Parse(DateOfBirth);
+            _newFaculty.Experience = Experience;
+            _newFaculty.Qualification = Qualification;
+            _dbcontext.FACULTies.Add(_newFaculty);
+            _dbcontext.SaveChanges();
+            GetData();
 
         }
 

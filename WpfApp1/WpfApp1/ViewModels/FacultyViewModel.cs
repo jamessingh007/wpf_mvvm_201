@@ -26,7 +26,6 @@ namespace WpfApp1.ViewModels
         public FacultyViewModel()
         {
             GetData();
-
         }
 
         /// <summary>
@@ -76,16 +75,44 @@ namespace WpfApp1.ViewModels
 
         }
 
-        private void DeleteFaculty()
+        //private ICommand Search;
+        //public ICommand SearchFacultyCommand
+        //{
+        //    get
+        //    {
+        //        if (Search == null)
+        //            Search = new RelayCommand(param => this.SearchFaculty(1));
+        //        return Search;
+        //    }
+
+        //}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="facultyID"></param>
+        private void SearchFaculty(int facultyID)
         {
-            if(SelectedFaculty != null)
+            
+        }
+
+        private ICommand Add;
+        public ICommand AddFacultyCommand
+        {
+            get
             {
-                _dbcontext.FACULTies.Remove(SelectedFaculty.objFaculty);
-                Faculties.Remove(SelectedFaculty);
-                _dbcontext.SaveChanges();
+                if (Add == null)
+                    Add = new RelayCommand(AddFaculty);
+                return Add;
             }
-            
-            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void AddFaculty()
+        {
+
         }
 
         /// <summary>
@@ -100,6 +127,18 @@ namespace WpfApp1.ViewModels
                     Delete = new RelayCommand(DeleteFaculty);
                 return Delete;
             }
+
+        }
+
+        private void DeleteFaculty()
+        {
+            if (SelectedFaculty != null)
+            {
+                _dbcontext.FACULTies.Remove(SelectedFaculty.objFaculty);
+                Faculties.Remove(SelectedFaculty);
+                _dbcontext.SaveChanges();
+            }
+
 
         }
 

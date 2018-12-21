@@ -11,37 +11,33 @@
     <Window.Resources>
         <viewModel:FacultyViewModel x:Key="FacultyViewModel"></viewModel:FacultyViewModel>
     </Window.Resources>
-    <Grid ShowGridLines="False">
-        <!--<userControls:AddFacultyUC Height="auto" Width="auto"></userControls:AddFacultyUC>-->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    <Grid Margin="0,0,0,20">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label x:Name="lblHeader" Content="Faculty Details" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="22"></Label>
-        <Label x:Name="lblFacultyID" Content="Faculty ID" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFacultyID" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="150,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        
-        <Label x:Name="lblFacultyName" Content="Faculty Name" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFacultyName" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="150,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        
-        <Label x:Name="lblDOB" Content="Date Of Birth" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtDOB" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="150,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        
-        <Label x:Name="lblExperience" Content="Experience" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtExperience" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="150,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        
-        <Label x:Name="lblQualification" Content="Qualification" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtQualification" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="150,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        
-        <Button x:Name="btnSubmit" Content="Submit" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Margin="20,10,20,10" FontSize="20"></Button>
+        <ListView Name="FacultyGrid" Grid.Row="1" Margin="4,130,12,13" ItemsSource="{Binding Faculties}" SelectedItem="{Binding SelectedFaculty}">
+            <ListView.View>
+                <GridView x:Name="grdTest" >
+                    <GridViewColumn Header="Faculty Id" DisplayMemberBinding="{Binding FacultyID}"  Width="auto"/>
+                    <GridViewColumn Header="Faculty Name" DisplayMemberBinding="{Binding FacultyName}"  Width="auto" />
+                    <GridViewColumn Header="DOB" DisplayMemberBinding="{Binding DateOfBirth}" Width="auto" />
+                    <GridViewColumn Header="Experience" DisplayMemberBinding="{Binding Experience}" Width="auto" />
+                    <GridViewColumn Header="Qualification" DisplayMemberBinding="{Binding Qualification}" Width="auto" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,12,0,0" Name="txtFacultyName" VerticalAlignment="Top" Width="178" Text="{Binding FacultyName}" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,38,0,0" Name="txtDOB" VerticalAlignment="Top" Width="178" Text="{Binding DateOfBirth}" />
+        <Label Content="Date Of Birth" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,38,0,0" Name="lblDOB" VerticalAlignment="Top" />
+        <Label Content="Faculty Name" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lblFacultyName" VerticalAlignment="Top" />
+        <Button Content="Add" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="310,60,0,0" Name="btnSearch" 
+                VerticalAlignment="Top" Width="141"
+                Command="{Binding AddFacultyCommand}"  />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,65,0,0" x:Name="txtCountry" VerticalAlignment="Top" Width="178" Text="{Binding Experience}" />
+        <Label Content="Experience" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,65,0,0" x:Name="lblExperience" VerticalAlignment="Top" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,93,0,0" x:Name="txtSTate" VerticalAlignment="Top" Width="178" Text="{Binding Qualification}" />
+        <Label Content="Qualification" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,93,0,0" x:Name="lblQualification" VerticalAlignment="Top" />
     </Grid>
 </Window>

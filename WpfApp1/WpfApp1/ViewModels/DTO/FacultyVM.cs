@@ -10,7 +10,8 @@ namespace WpfApp1.ViewModels
     public class Faculty : INotifyPropertyChanged
     {
         public FACULTY objFaculty;
-        
+        private string _searchKeyword;
+
         public Faculty()
         {
             objFaculty = new FACULTY();
@@ -73,6 +74,19 @@ namespace WpfApp1.ViewModels
             {
                 objFaculty.Qualification = value;
                 OnPropertyChanged("Qualification");
+            }
+        }
+
+        public string SearchKeyword
+        {
+            get
+            {
+                return _searchKeyword;
+            }
+            set
+            {
+                _searchKeyword = value;
+                OnPropertyChanged("SearchKeyword");
             }
         }
 

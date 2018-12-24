@@ -9,15 +9,19 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using WpfApp1.Views;
 using System.Windows;
+using WpfApp1.Views;
+using System.Data.SqlClient;
+
 
 
 
 namespace WpfApp1.ViewModels
 {
+    
     public class FacultyViewModel : Faculty
     {
+        ExceptionHandling exObj = new ExceptionHandling();
         TrainingContext _dbcontext = new TrainingContext();
         public Faculty SelectedFaculty
         {
@@ -34,7 +38,6 @@ namespace WpfApp1.ViewModels
         private ObservableCollection<Faculty> _Faculties = new ObservableCollection<Faculty>();
         public ObservableCollection<Faculty> Faculties
         {
-            //get;set;
             get { return _Faculties; }
             set { _Faculties = value; }
         }
@@ -47,46 +50,54 @@ namespace WpfApp1.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// GetData()
         /// </summary>
         protected void GetData()
-        {   
-            if (_Faculties.Count > 0)
+        {
+            try
             {
-                _Faculties.Clear();
+                if (_Faculties.Count > 0)
+                {
+                    _Faculties.Clear();
+                }
+                var faculties = _dbcontext.FACULTies.Take(40).OrderByDescending(o => o.FacultyID).ToList();
+                foreach (FACULTY prod in faculties)
+                {
+                    _Faculties.Add(new Faculty { objFaculty = prod });
+                }
             }
-            var faculties = _dbcontext.FACULTies.Take(10).OrderByDescending(o => o.FacultyID).ToList();
-            foreach (FACULTY prod in faculties)
+            catch (Exception ex)
             {
-                _Faculties.Add(new Faculty { objFaculty = prod });
+                exObj.ShowExMsg(ex.InnerException);
+                
             }
+            
         }
-
         /// <summary>
-        /// 
+        /// GenerateFacultyID()
         /// </summary>
         /// <returns></returns>
         protected int GenerateFacultyID()
         {
-            int fid=0;
-            if (_Faculties.Count > 0)
+            int fid = 0;
+            try
             {
-                fid = _Faculties.First().FacultyID;
+                if (_Faculties.Count > 0)
+                {
+                    fid = _Faculties.First().FacultyID;
+                }
+                fid++;
             }
-            fid++;
+            catch (Exception ex)
+            {
+
+                exObj.ShowExMsg(ex.InnerException);
+            }
             return fid;
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        private void UpdateFacultyChanges()
-        {
-            _dbcontext.SaveChanges();
-        }
-
-        /// <summary>
-        ///
+        /// Update faculty
         /// </summary>
         private ICommand Update;
         public ICommand UpdateFacultyCommand
@@ -97,9 +108,23 @@ namespace WpfApp1.ViewModels
                     Update = new RelayCommand(UpdateFacultyChanges);
                 return Update;
             }
+        }
+        private void UpdateFacultyChanges()
+        {
+            try
+            {
+                _dbcontext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
 
+                exObj.ShowExMsg(ex.InnerException);
+            }
         }
 
+        /// <summary>
+        /// Search faculty
+        /// </summary>
         private ICommand Search;
         public ICommand SearchFacultyCommand
         {
@@ -111,15 +136,41 @@ namespace WpfApp1.ViewModels
             }
 
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private void SearchFaculty()
         {
-
+            try
+            {
+                int _searchId = 0; 
+                if (SearchKeyword.All(char.IsDigit))
+                {
+                    _searchId = Convert.ToInt16(SearchKeyword);
+                }
+                if (_Faculties.Count > 0)
+                {
+                    _Faculties.Clear();
+                }
+                var faculties = _dbcontext.FACULTies.Where(x => x.FacultyName.Contains(SearchKeyword) || x.FacultyID == _searchId);
+                if (faculties.Count() > 0)
+                {
+                    foreach (FACULTY prod in faculties)
+                    {
+                        _Faculties.Add(new Faculty { objFaculty = prod });
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No records found.", "Search Result",MessageBoxButton.OK);
+                }
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex.InnerException);
+            }
         }
 
+        /// <summary>
+        /// ADD faculty
+        /// </summary>
         private ICommand Add;
         public ICommand AddFacultyCommand
         {
@@ -130,26 +181,28 @@ namespace WpfApp1.ViewModels
                 return Add;
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private void AddFaculty()
         {
-            FACULTY _newFaculty = new FACULTY();
-            _newFaculty.FacultyID = GenerateFacultyID();
-            _newFaculty.FacultyName = FacultyName;
-            _newFaculty.DateOfBirth = DateTime.Parse(DateOfBirth);
-            _newFaculty.Experience = Experience;
-            _newFaculty.Qualification = Qualification;
-            _dbcontext.FACULTies.Add(_newFaculty);
-            _dbcontext.SaveChanges();
-            GetData();
-
+            try
+            {
+                FACULTY _newFaculty = new FACULTY();
+                _newFaculty.FacultyID = GenerateFacultyID();
+                _newFaculty.FacultyName = FacultyName;
+                _newFaculty.DateOfBirth = DateTime.Parse(DateOfBirth);
+                _newFaculty.Experience = Experience;
+                _newFaculty.Qualification = Qualification;
+                _dbcontext.FACULTies.Add(_newFaculty);
+                _dbcontext.SaveChanges();
+                GetData();
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex.InnerException);
+            }
         }
 
         /// <summary>
-        /// 
+        /// Delete Faculty
         /// </summary>
         private ICommand Delete;
         public ICommand DeleteFacultyCommand
@@ -162,17 +215,21 @@ namespace WpfApp1.ViewModels
             }
 
         }
-
         private void DeleteFaculty()
         {
-            if (SelectedFaculty != null)
+            try
             {
-                _dbcontext.FACULTies.Remove(SelectedFaculty.objFaculty);
-                Faculties.Remove(SelectedFaculty);
-                _dbcontext.SaveChanges();
+                if (SelectedFaculty != null)
+                {
+                    _dbcontext.FACULTies.Remove(SelectedFaculty.objFaculty);
+                    Faculties.Remove(SelectedFaculty);
+                    _dbcontext.SaveChanges();
+                }
             }
-
-
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex.InnerException);
+            }
         }
 
         /// <summary>

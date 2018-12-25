@@ -44,11 +44,22 @@ namespace WpfApp1.ViewModels
         {
             get
             {
-                return objFaculty.DateOfBirth.ToString();
+                //return objFaculty.DateOfBirth.ToString();
+
+                string _dob  = objFaculty.DateOfBirth.ToString();
+                if (_dob == "" || _dob == null)
+                {
+                    _dob = null;
+                }
+                else
+                {
+                    _dob = objFaculty.DateOfBirth.ToString().Replace("00:00:00", "");
+                }
+                return _dob;
             }
             set
             {
-                objFaculty.DateOfBirth = Convert.ToDateTime(value);
+                objFaculty.DateOfBirth = DateTime.Parse(value);
                 OnPropertyChanged("DateOfBirth");
             }
         }

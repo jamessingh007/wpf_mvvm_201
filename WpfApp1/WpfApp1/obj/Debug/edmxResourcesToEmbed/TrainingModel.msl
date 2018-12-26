@@ -1,17 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="TrainingModelStoreContainer" CdmEntityContainer="TrainingContext">
-    <EntitySetMapping Name="BATCHes">
-      <EntityTypeMapping TypeName="TrainingModel.BATCH">
-        <MappingFragment StoreEntitySet="BATCH">
-          <ScalarProperty Name="BatchID" ColumnName="BatchID" />
-          <ScalarProperty Name="BatchStartDate" ColumnName="BatchStartDate" />
-          <ScalarProperty Name="BatchEndDate" ColumnName="BatchEndDate" />
-          <ScalarProperty Name="Stream" ColumnName="Stream" />
-          <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="FACULTies">
       <EntityTypeMapping TypeName="TrainingModel.FACULTY">
         <MappingFragment StoreEntitySet="FACULTY">
@@ -32,6 +21,17 @@
           <ScalarProperty Name="BatchID" ColumnName="BatchID" />
           <ScalarProperty Name="CourseRegistered" ColumnName="CourseRegistered" />
           <ScalarProperty Name="DateofRegistration" ColumnName="DateofRegistration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BATCHes">
+      <EntityTypeMapping TypeName="TrainingModel.BATCH">
+        <MappingFragment StoreEntitySet="BATCH">
+          <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+          <ScalarProperty Name="Stream" ColumnName="Stream" />
+          <ScalarProperty Name="BatchEndDate" ColumnName="BatchEndDate" />
+          <ScalarProperty Name="BatchStartDate" ColumnName="BatchStartDate" />
+          <ScalarProperty Name="BatchID" ColumnName="BatchID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

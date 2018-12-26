@@ -9,9 +9,17 @@ namespace WpfApp1
 {
     class ExceptionHandling
     {
-        internal void ShowExMsg(Exception innerException)
+        internal void ShowExMsg(Exception Exception)
         {
-            MessageBox.Show(innerException.ToString(), "Exception", MessageBoxButton.OK);
+            if (Exception != null)
+            {
+                MessageBox.Show(Exception.InnerException.ToString(), "Exception", MessageBoxButton.OK);
+            }
+            else
+            {
+                MessageBox.Show("Operation was not successful","Error", MessageBoxButton.OK);
+            }
+
         }
     }
 }

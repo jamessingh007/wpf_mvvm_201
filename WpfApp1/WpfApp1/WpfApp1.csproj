@@ -88,9 +88,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TrainingModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\BatchViewModel.cs" />
+    <Compile Include="ViewModels\DTO\BatchVM.cs" />
     <Compile Include="ViewModels\DTO\FacultyVM.cs" />
     <Compile Include="ViewModels\FacultyViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\AddBatchView.xaml.cs">
+      <DependentUpon>AddBatchView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddFacultyView.xaml.cs">
       <DependentUpon>AddFacultyView.xaml</DependentUpon>
     </Compile>
@@ -109,6 +114,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddBatchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddFacultyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

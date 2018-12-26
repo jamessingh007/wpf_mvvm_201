@@ -23,8 +23,23 @@ namespace WpfApp1.Views
         public SearchFacultyView()
         {
             InitializeComponent();
-            FacultyViewModel fvm = new FacultyViewModel();
-            this.DataContext = fvm;
+            SetDataContext();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        internal void SetDataContext()
+        {
+            ExceptionHandling exObj = new ExceptionHandling();
+            try
+            {
+                this.DataContext = new FacultyViewModel();
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex);
+            }
+
         }
     }
 }

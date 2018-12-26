@@ -40,27 +40,23 @@ namespace WpfApp1.ViewModels
                 OnPropertyChanged("FacultyName");
             }
         }
-        public string DateOfBirth
+        public Nullable<System.DateTime> DateOfBirth
         {
             get
             {
-                //return objFaculty.DateOfBirth.ToString();
-
-                string _dob  = objFaculty.DateOfBirth.ToString();
-                if (_dob == "" || _dob == null)
-                {
-                    _dob = null;
-                }
-                else
-                {
-                    _dob = objFaculty.DateOfBirth.ToString().Replace("00:00:00", "");
-                }
-                return _dob;
+                var  _dob  = objFaculty.DateOfBirth;
+                DateTime dob;
+                dob = DateTime.Parse(_dob.ToString()).Date;
+                return dob;
             }
             set
             {
-                objFaculty.DateOfBirth = DateTime.Parse(value);
-                OnPropertyChanged("DateOfBirth");
+                if (value != null)
+                {
+                    string _dob = Convert.ToString(value);
+                    objFaculty.DateOfBirth = DateTime.Parse(_dob).Date;
+                    OnPropertyChanged("DateOfBirth");
+                }
             }
         }
         public int Experience

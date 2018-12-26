@@ -3,53 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using WpfApp1.ViewModels.DTO;
-using System.Data.Entity;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Data.Entity;
 using System.Windows.Input;
 using System.Windows;
-using WpfApp1.Views;
-using System.Data.SqlClient;
-
-
-
 
 namespace WpfApp1.ViewModels
 {
-    
-    public class FacultyViewModel : Faculty
+    class BatchViewModel: Batch
     {
         ExceptionHandling exObj = new ExceptionHandling();
         TrainingContext _dbcontext = new TrainingContext();
-        public Faculty SelectedFaculty
+        public Batch SelectedBatch
+        {
+            get;
+            set;
+        }
+        public string SelectedStream
         {
             get;
             set;
         }
 
 
-        public FacultyViewModel()
+        public BatchViewModel()
         {
             GetData();
         }
 
-        private ObservableCollection<Faculty> _Faculties = new ObservableCollection<Faculty>();
-        public ObservableCollection<Faculty> Faculties
+        private ObservableCollection<Batch> _Batches = new ObservableCollection<Batch>();
+        public ObservableCollection<Batch> Batches
         {
-            get { return _Faculties; }
-            set { _Faculties = value; }
+            get { return _Batches; }
+            set { _Batches = value; }
         }
 
-        private Faculty _newFaculty = new Faculty();
-        public Faculty newFaculty
+        private Batch _newBatch = new Batch();
+        public Batch newBatch
         {
-            get { return _newFaculty; }
-            set { _newFaculty = value; }
+            get { return _newBatch; }
+            set { _newBatch = value; }
         }
 
-        
+
         /// <summary>
         /// GetData()
         /// </summary>
@@ -57,64 +53,64 @@ namespace WpfApp1.ViewModels
         {
             try
             {
-                if (_Faculties.Count > 0)
+                if (_Batches.Count > 0)
                 {
-                    _Faculties.Clear();
+                    _Batches.Clear();
                 }
-                var faculties = _dbcontext.FACULTies.Take(40).OrderByDescending(o => o.FacultyID).ToList();
-                foreach (FACULTY faculty in faculties)
+                var batches = _dbcontext.BATCHes.Take(40).OrderByDescending(o => o.BatchID).ToList();
+                foreach (BATCH batch in batches)
                 {
-                    _Faculties.Add(new Faculty { objFaculty = faculty });
+                    _Batches.Add(new Batch { objBatch = batch });
                 }
             }
             catch (Exception ex)
             {
                 exObj.ShowExMsg(ex.InnerException);
-                
+
             }
-            
+
         }
         /// <summary>
         /// GenerateFacultyID()
         /// </summary>
         /// <returns></returns>
-        protected int GenerateFacultyID()
+        protected int GenerateBatchID()
         {
-            int fid = 0;
+            int bid = 0;
             try
             {
-                if (_Faculties.Count > 0)
+                if (_Batches.Count > 0)
                 {
-                    fid = _Faculties.First().FacultyID;
+                    bid = _Batches.First().BatchID;
                 }
-                fid++;
+                bid++;
             }
             catch (Exception ex)
             {
 
                 exObj.ShowExMsg(ex.InnerException);
             }
-            return fid;
+            return bid;
         }
 
         /// <summary>
         /// Update faculty
         /// </summary>
         private ICommand Update;
-        public ICommand UpdateFacultyCommand
+        public ICommand UpdateBatchCommand
         {
             get
             {
                 if (Update == null)
-                    Update = new RelayCommand(UpdateFacultyChanges);
+                    Update = new RelayCommand(UpdateBatchChanges);
                 return Update;
             }
         }
-        private void UpdateFacultyChanges()
+        private void UpdateBatchChanges()
         {
             try
             {
-                if (MessageBox.Show("Dp you want to update the selected faculty?", "Confirm Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Dp you want to update the selected Batch?", "Confirm Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     _dbcontext.SaveChanges();
                 }
@@ -135,40 +131,40 @@ namespace WpfApp1.ViewModels
         /// Search faculty
         /// </summary>
         private ICommand Search;
-        public ICommand SearchFacultyCommand
+        public ICommand SearchBatchCommand
         {
             get
             {
                 if (Search == null)
-                    Search = new RelayCommand(SearchFaculty);
+                    Search = new RelayCommand(SearchBatch);
                 return Search;
             }
 
         }
-        private void SearchFaculty()
+        private void SearchBatch()
         {
             try
             {
-                int _searchId = 0; 
+                int _searchId = 0;
                 if (SearchKeyword.All(char.IsDigit))
                 {
                     _searchId = Convert.ToInt16(SearchKeyword);
                 }
-                if (_Faculties.Count > 0)
+                if (_Batches.Count > 0)
                 {
-                    _Faculties.Clear();
+                    _Batches.Clear();
                 }
-                var faculties = _dbcontext.FACULTies.Where(x => x.FacultyName.Contains(SearchKeyword) || x.FacultyID == _searchId);
-                if (faculties.Count() > 0)
+                var batches = _dbcontext.BATCHes.Where(x => x.BatchID == _searchId);
+                if (batches.Count() > 0)
                 {
-                    foreach (FACULTY faculty in faculties)
+                    foreach (BATCH batch in batches)
                     {
-                        _Faculties.Add(new Faculty { objFaculty = faculty });
+                        _Batches.Add(new Batch { objBatch = batch });
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No records found.", "Search Result",MessageBoxButton.OK);
+                    MessageBox.Show("No records found.", "Search Result", MessageBoxButton.OK);
                 }
             }
             catch (Exception ex)
@@ -181,28 +177,27 @@ namespace WpfApp1.ViewModels
         /// ADD faculty
         /// </summary>
         private ICommand Add;
-        public ICommand AddFacultyCommand
+        public ICommand AddBatchCommand
         {
             get
             {
                 if (Add == null)
-                    Add = new RelayCommand(AddFaculty);
+                    Add = new RelayCommand(AddBatch);
                 return Add;
             }
         }
-        private void AddFaculty()
+        private void AddBatch()
         {
             try
             {
-                if (MessageBox.Show("Dp you want to add the new faculty?", "Confirm Add", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Dp you want to add the new Batch?", "Confirm Add", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    FACULTY _newFaculty = new FACULTY();
-                    _newFaculty.FacultyID = GenerateFacultyID();
-                    _newFaculty.FacultyName = FacultyName;
-                    _newFaculty.DateOfBirth = DateOfBirth;
-                    _newFaculty.Experience = Experience;
-                    _newFaculty.Qualification = Qualification;
-                    _dbcontext.FACULTies.Add(_newFaculty);
+                    BATCH _newBatch = new BATCH();
+                    _newBatch.BatchID = GenerateBatchID();
+                    _newBatch.BatchStartDate = BatchStartDate;
+                    _newBatch.BatchEndDate = BatchEndDate;
+                    _newBatch.Stream = SelectedStream;
+                    _dbcontext.BATCHes.Add(_newBatch);
                     _dbcontext.SaveChanges();
                     GetData();
                     ClearFills();
@@ -218,10 +213,8 @@ namespace WpfApp1.ViewModels
         {
             try
             {
-                FacultyName = "";
-                DateOfBirth = null;
-                Experience = 0;
-                Qualification = "";
+                BatchStartDate = null;
+                BatchEndDate = null;
             }
             catch (Exception ex)
             {
@@ -233,26 +226,26 @@ namespace WpfApp1.ViewModels
         /// Delete Faculty
         /// </summary>
         private ICommand Delete;
-        public ICommand DeleteFacultyCommand
+        public ICommand DeleteBatchCommand
         {
             get
             {
                 if (Delete == null)
-                    Delete = new RelayCommand(DeleteFaculty);
+                    Delete = new RelayCommand(DeleteBatch);
                 return Delete;
             }
 
         }
-        private void DeleteFaculty()
+        private void DeleteBatch()
         {
             try
             {
-                if (SelectedFaculty != null)
+                if (SelectedBatch != null)
                 {
-                    if (MessageBox.Show("Dp you want to delete the selected faculty?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Dp you want to delete the selected Batch?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        _dbcontext.FACULTies.Remove(SelectedFaculty.objFaculty);
-                        Faculties.Remove(SelectedFaculty);
+                        _dbcontext.BATCHes.Remove(SelectedBatch.objBatch);
+                        Batches.Remove(SelectedBatch);
                         _dbcontext.SaveChanges();
                     }
                 }

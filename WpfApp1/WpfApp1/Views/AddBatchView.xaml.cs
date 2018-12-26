@@ -16,15 +16,14 @@ using WpfApp1.ViewModels;
 namespace WpfApp1.Views
 {
     /// <summary>
-    /// Interaction logic for AddFacultyView.xaml
+    /// Interaction logic for AddBatchView.xaml
     /// </summary>
-    public partial class AddFacultyView : Window
+    public partial class AddBatchView : Window
     {
-        public AddFacultyView()
+        public AddBatchView()
         {
             InitializeComponent();
-            this.DataContext = new FacultyViewModel();
-
+            this.DataContext = new BatchViewModel();
         }
     }
 }

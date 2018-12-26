@@ -16,17 +16,17 @@ namespace WpfApp1
     public partial class TrainingContext : DbContext
     {
         public TrainingContext()
-            : base("TrainingContext")
+            : base("name=TrainingContext")
         {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //throw new UnintentionalCodeFirstException();
+            throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BATCH> BATCHes { get; set; }
         public virtual DbSet<FACULTY> FACULTies { get; set; }
         public virtual DbSet<PARTICIPANT> PARTICIPANTs { get; set; }
+        public virtual DbSet<BATCH> BATCHes { get; set; }
     }
 }

@@ -1,17 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TrainingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="BATCH">
-    <Key>
-      <PropertyRef Name="BatchID" />
-    </Key>
-    <Property Name="BatchID" Type="Int32" Nullable="false" />
-    <Property Name="BatchStartDate" Type="DateTime" Precision="0" />
-    <Property Name="BatchEndDate" Type="DateTime" Precision="0" />
-    <Property Name="Stream" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="FacultyID" Type="Int32" />
-    <NavigationProperty Name="PARTICIPANTs" Relationship="Self.FK_BATCH_PARTICIPANT" FromRole="BATCH" ToRole="PARTICIPANT" />
-    <NavigationProperty Name="FACULTY" Relationship="Self.FK_BatchFaculty" FromRole="BATCH" ToRole="FACULTY" />
-  </EntityType>
   <EntityType Name="FACULTY">
     <Key>
       <PropertyRef Name="FacultyID" />
@@ -21,7 +9,7 @@
     <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
     <Property Name="Experience" Type="Int32" />
     <Property Name="Qualification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="BATCHes" Relationship="Self.FK_BatchFaculty" FromRole="FACULTY" ToRole="BATCH" />
+    <NavigationProperty Name="BATCHes" Relationship="TrainingModel.FK_BatchFaculty" FromRole="FACULTY" ToRole="BATCH" />
   </EntityType>
   <EntityType Name="PARTICIPANT">
     <Key>
@@ -33,11 +21,36 @@
     <Property Name="BatchID" Type="Int32" />
     <Property Name="CourseRegistered" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="DateofRegistration" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="BATCH" Relationship="Self.FK_BATCH_PARTICIPANT" FromRole="PARTICIPANT" ToRole="BATCH" />
+    <NavigationProperty Name="BATCH" Relationship="TrainingModel.FK_BATCH_PARTICIPANT" FromRole="PARTICIPANT" ToRole="BATCH" />
+  </EntityType>
+  <EntityContainer Name="TrainingContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FACULTies" EntityType="Self.FACULTY" />
+    <EntitySet Name="PARTICIPANTs" EntityType="Self.PARTICIPANT" />
+    <EntitySet Name="BATCHes" EntityType="TrainingModel.BATCH" />
+    <AssociationSet Name="FK_BATCH_PARTICIPANT" Association="TrainingModel.FK_BATCH_PARTICIPANT">
+      <End Role="BATCH" EntitySet="BATCHes" />
+      <End Role="PARTICIPANT" EntitySet="PARTICIPANTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatchFaculty" Association="TrainingModel.FK_BatchFaculty">
+      <End Role="FACULTY" EntitySet="FACULTies" />
+      <End Role="BATCH" EntitySet="BATCHes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BATCH">
+    <Key>
+      <PropertyRef Name="BatchID" />
+    </Key>
+    <Property Name="BatchID" Type="Int32" Nullable="false" />
+    <Property Name="BatchStartDate" Type="DateTime" Precision="0" />
+    <Property Name="BatchEndDate" Type="DateTime" Precision="0" />
+    <Property Name="Stream" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FacultyID" Type="Int32" />
+    <NavigationProperty Name="PARTICIPANTs" Relationship="TrainingModel.FK_BATCH_PARTICIPANT" FromRole="BATCH" ToRole="PARTICIPANT" />
+    <NavigationProperty Name="FACULTY" Relationship="TrainingModel.FK_BatchFaculty" FromRole="BATCH" ToRole="FACULTY" />
   </EntityType>
   <Association Name="FK_BATCH_PARTICIPANT">
-    <End Role="BATCH" Type="Self.BATCH" Multiplicity="0..1" />
-    <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="*" />
+    <End Type="TrainingModel.BATCH" Role="BATCH" Multiplicity="0..1" />
+    <End Type="TrainingModel.PARTICIPANT" Role="PARTICIPANT" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="BATCH">
         <PropertyRef Name="BatchID" />
@@ -48,8 +61,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_BatchFaculty">
-    <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="0..1" />
-    <End Role="BATCH" Type="Self.BATCH" Multiplicity="*" />
+    <End Type="TrainingModel.FACULTY" Role="FACULTY" Multiplicity="0..1" />
+    <End Type="TrainingModel.BATCH" Role="BATCH" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FACULTY">
         <PropertyRef Name="FacultyID" />
@@ -59,17 +72,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="TrainingContext" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="BATCHes" EntityType="Self.BATCH" />
-    <EntitySet Name="FACULTies" EntityType="Self.FACULTY" />
-    <EntitySet Name="PARTICIPANTs" EntityType="Self.PARTICIPANT" />
-    <AssociationSet Name="FK_BATCH_PARTICIPANT" Association="Self.FK_BATCH_PARTICIPANT">
-      <End Role="BATCH" EntitySet="BATCHes" />
-      <End Role="PARTICIPANT" EntitySet="PARTICIPANTs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BatchFaculty" Association="Self.FK_BatchFaculty">
-      <End Role="FACULTY" EntitySet="FACULTies" />
-      <End Role="BATCH" EntitySet="BATCHes" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

@@ -28,7 +28,7 @@ namespace WpfApp1.ViewModels
                 objFaculty.FacultyID = value;
             }
         }
-        public String FacultyName
+        public string FacultyName
         {
             get
             {
@@ -71,7 +71,7 @@ namespace WpfApp1.ViewModels
                 OnPropertyChanged("Experience");
             }
         }
-        public String Qualification
+        public string Qualification
         {
             get
             {

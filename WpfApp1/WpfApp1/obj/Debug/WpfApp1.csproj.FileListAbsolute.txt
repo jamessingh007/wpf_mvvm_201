@@ -50,3 +50,5 @@ D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.pdb
 D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csprojAssemblyReference.cache
 D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\AddBatchView.g.cs
 D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\AddBatchView.baml
+D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchBatchView.g.cs
+D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchBatchView.baml

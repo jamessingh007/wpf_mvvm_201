@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\App.xaml
-4-1315947944
+51920815130
 2-834434831
-24-1267880977
+251782589081
 18166574728
-MainWindow.xaml;Views\AddBatchView.xaml;Views\AddFacultyView.xaml;Views\SearchFacultyView.xaml;
+MainWindow.xaml;Views\AddBatchView.xaml;Views\AddFacultyView.xaml;Views\SearchBatchView.xaml;Views\SearchFacultyView.xaml;
 
-False
+True
 

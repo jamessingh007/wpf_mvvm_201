@@ -16,9 +16,35 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView Name="FacultyGrid" Grid.Row="1" Margin="4,178,12,13"  ItemsSource="{Binding Faculties}" SelectedItem="{Binding SelectedFaculty}" Width="750">
+        
+        <Label Content="Modify Exisiting information" Grid.Row="0" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lblModifyHeader" Width="266" FontWeight="Medium" FontSize="14" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="#FF302C2C" Foreground="#FFF1E7E7"/>
+        <Label Content="Faculty ID" Grid.Row="1" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lblFacultyID"  VerticalAlignment="Top"/>
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,7,0,0" Name="txtFacultyID" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyListView,Path=SelectedItem.FacultyID}" IsEnabled="False" />
+        <Label Content="Faculty Name" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,35,0,0" Name="lblFacultyName" VerticalAlignment="Top" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,35,0,0" Name="txtFacultyName" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyListView,Path=SelectedItem.FacultyName}" />
+        <Label Content="Date of Birth" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,60,0,0" Name="lblDOB" VerticalAlignment="Top" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,62,0,0" Name="txtDOB" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyListView,Path=SelectedItem.DateOfBirth}" />
+        <Label Content="Experience" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,86,0,0" x:Name="lblExperience" VerticalAlignment="Top" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,88,0,0" x:Name="txtCountry" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyListView,Path=SelectedItem.Experience}" />
+        <Label Content="Qualification" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,113,0,0" x:Name="lblQualification" VerticalAlignment="Top" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,115,0,0" x:Name="txtSTate" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyListView, Path=SelectedItem.Qualification}" />
+        <Button Content="Update" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="12,145,0,0" Name="btnUpdate" 
+                VerticalAlignment="Top" Width="119"
+                Command="{Binding UpdateFacultyCommand}"  />
+        <Button Content="Delete" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="160,145,0,0" Name="btnDelete" 
+                VerticalAlignment="Top" Width="119"
+                Command="{Binding DeleteFacultyCommand}" CommandParameter="{Binding ElementName=FacultyListView,Path=SelectedItem.FacultyID}" />
+        
+        <Label Content="Enter Search Keywords(ID/Name)" Grid.Row="1" HorizontalAlignment="Left" Margin="530,12,0,0" Name="lblsearchKeyword" Background="#FF191818" Foreground="#FFF1EEEE" VerticalAlignment="Top"/>
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="480,40,0,0" Name="txtsearchkeyword" VerticalAlignment="Top" Width="278" Text="{Binding SearchKeyword}"/>
+
+        <Button Content="Search" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="550,65,0,0" Name="btnSearch" 
+                VerticalAlignment="Top" Width="141"
+                Command="{Binding SearchFacultyCommand}"/>
+
+        <ListView Name="FacultyListView" Grid.Row="1" HorizontalAlignment="Left" Margin="12,178,12,13"  ItemsSource="{Binding Faculties}" SelectedItem="{Binding SelectedFaculty}" Width="750">
             <ListView.View>
-                <GridView x:Name="grdTest">
+                <GridView x:Name="grdFaculty">
                     <GridViewColumn Header="Faculty Id" DisplayMemberBinding="{Binding FacultyID}"  Width="auto"/>
                     <GridViewColumn Header="Faculty Name" DisplayMemberBinding="{Binding FacultyName}"  Width="auto" />
                     <GridViewColumn Header="DOB" DisplayMemberBinding="{Binding DateOfBirth,StringFormat=dd MMM yyyy}" Width="auto" />
@@ -27,28 +53,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Modify Exisiting information" Grid.Row="0" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lblModifyHeader" Width="266" FontWeight="Medium" FontSize="14" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="#FF302C2C" Foreground="#FFF1E7E7"/>
-        <Label Content="Faculty ID" Grid.Row="1" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lblFacultyID"  VerticalAlignment="Top"/>
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,7,0,0" Name="txtFacultyID" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyGrid,Path=SelectedItem.FacultyID}" IsEnabled="False" />
-        <Label Content="Faculty Name" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,35,0,0" Name="lblFacultyName" VerticalAlignment="Top" />
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,35,0,0" Name="txtFacultyName" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyGrid,Path=SelectedItem.FacultyName}" />
-        <Label Content="Date of Birth" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,60,0,0" Name="lblDOB" VerticalAlignment="Top" />
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,62,0,0" Name="txtDOB" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyGrid,Path=SelectedItem.DateOfBirth}" />
-        <Label Content="Experience" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,86,0,0" x:Name="lblExperience" VerticalAlignment="Top" />
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,88,0,0" x:Name="txtCountry" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyGrid,Path=SelectedItem.Experience}" />
-        <Label Content="Qualification" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,113,0,0" x:Name="lblQualification" VerticalAlignment="Top" />
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,115,0,0" x:Name="txtSTate" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyGrid, Path=SelectedItem.Qualification}" />
-        <Button Content="Update" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="12,145,0,0" Name="btnUpdate" 
-                VerticalAlignment="Top" Width="119"
-                Command="{Binding UpdateFacultyCommand}"  />
-        <Button Content="Delete" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="160,145,0,0" Name="btnDelete" 
-                VerticalAlignment="Top" Width="119"
-                Command="{Binding DeleteFacultyCommand}" CommandParameter="{Binding ElementName=FacultyGrid,Path=SelectedItem.FacultyID}" />
-        <Label Content="Enter Search Keywords(ID/Name)" Grid.Row="1" HorizontalAlignment="Left" Margin="530,12,0,0" Name="lblsearchKeyword" Background="#FF191818" Foreground="#FFF1EEEE" VerticalAlignment="Top"/>
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="480,40,0,0" Name="txtsearchkeyword" VerticalAlignment="Top" Width="278" Text="{Binding SearchKeyword}"/>
-
-        <Button Content="Search" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="550,65,0,0" Name="btnSearch" 
-                VerticalAlignment="Top" Width="141"
-                Command="{Binding SearchFacultyCommand}"/>
     </Grid>
 </Window>

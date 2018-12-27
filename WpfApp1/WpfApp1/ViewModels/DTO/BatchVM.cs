@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Collections;
 
 namespace WpfApp1.ViewModels
 {
@@ -11,7 +8,7 @@ namespace WpfApp1.ViewModels
     {
         public WpfApp1.BATCH objBatch;
         private string _searchKeyword;
-
+        private string _SelectedFacultyID;
         public Batch()
         {
             objBatch = new BATCH();
@@ -76,7 +73,8 @@ namespace WpfApp1.ViewModels
             }
         }
 
-        public String Stream
+        
+        public string Stream
         {
             get
             {
@@ -84,8 +82,22 @@ namespace WpfApp1.ViewModels
             }
             set
             {
+
                 objBatch.Stream = value;
                 OnPropertyChanged("Stream");
+            }
+        }
+
+        public Nullable<int> FacultyID
+        {
+            get
+            {
+                return objBatch.FacultyID;
+            }
+            set
+            {
+                objBatch.FacultyID = value;
+                OnPropertyChanged("FacultyID");
             }
         }
 
@@ -100,6 +112,22 @@ namespace WpfApp1.ViewModels
                 _searchKeyword = value;
                 OnPropertyChanged("SearchKeyword");
             }
+        }
+
+        
+        public string SelectedFacultyID
+        {
+            get
+            {
+                return _SelectedFacultyID;
+            }
+            set
+            {
+                _SelectedFacultyID = value;
+                OnPropertyChanged("SelectedFacultyID");
+
+            }
+
         }
 
         #region INotifyPropertyChanged members

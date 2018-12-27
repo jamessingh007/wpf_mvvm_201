@@ -12,17 +12,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView Name="FacultyGrid" Grid.Row="1" Margin="4,183.2,11.6,13.8" ItemsSource="{Binding Faculties}">
-            <ListView.View>
-                <GridView x:Name="grdTest" >
-                    <GridViewColumn Header="Faculty Id" DisplayMemberBinding="{Binding FacultyID}"  Width="auto"/>
-                    <GridViewColumn Header="Faculty Name" DisplayMemberBinding="{Binding FacultyName}"  Width="auto" />
-                    <GridViewColumn Header="DOB" DisplayMemberBinding="{Binding DateOfBirth,StringFormat=dd MMM yyyy}" Width="auto" />
-                    <GridViewColumn Header="Experience" DisplayMemberBinding="{Binding Experience}" Width="auto" />
-                    <GridViewColumn Header="Qualification" DisplayMemberBinding="{Binding Qualification}" Width="auto" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+        
         <Label Content="Provide Faculty Details" Grid.Row="0" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lbladdDetails" Width="266" FontWeight="Medium" FontSize="14" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="#FF302C2C" Foreground="#FFF1E7E7" Height="29"/>
         <Label Content="Faculty Name" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lblFacultyName" VerticalAlignment="Top" Width="82" />
         <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,12,0,0" Name="txtFacultyName" VerticalAlignment="Top" Width="178" Text="{Binding FacultyName}" />
@@ -36,5 +26,17 @@
         <Button Content="Add" Grid.Row="1" Height="35" HorizontalAlignment="Left" Margin="115,140,0,0" Name="btnAddFaculty" 
                 VerticalAlignment="Top" Width="141"
                 Command="{Binding AddFacultyCommand}" Grid.Column="0" FontSize="16"  />
+
+        <ListView Name="FacultyListView" Grid.Row="1" HorizontalAlignment="Left" Width="750" Margin="12,183.2,11.6,13.8" ItemsSource="{Binding Faculties}">
+            <ListView.View>
+                <GridView x:Name="grdFaculty" >
+                    <GridViewColumn Header="Faculty Id" DisplayMemberBinding="{Binding FacultyID}"  Width="auto"/>
+                    <GridViewColumn Header="Faculty Name" DisplayMemberBinding="{Binding FacultyName}"  Width="auto" />
+                    <GridViewColumn Header="DOB" DisplayMemberBinding="{Binding DateOfBirth,StringFormat=dd MMM yyyy}" Width="auto" />
+                    <GridViewColumn Header="Experience" DisplayMemberBinding="{Binding Experience}" Width="auto" />
+                    <GridViewColumn Header="Qualification" DisplayMemberBinding="{Binding Qualification}" Width="auto" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

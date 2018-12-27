@@ -1,34 +1,54 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
-using System.Windows.Input;
+using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace WpfApp1.ViewModels
 {
-    class BatchViewModel: Batch
+    class BatchViewModel : Batch
     {
         ExceptionHandling exObj = new ExceptionHandling();
         TrainingContext _dbcontext = new TrainingContext();
+        public ObservableCollection<string> StreamCollection { get; set; }
+        public ObservableCollection<string> FacultyIDCollection { get; set; }
+        public ObservableCollection<string> _colFacultyID =  new ObservableCollection<string>();
+
         public Batch SelectedBatch
         {
             get;
             set;
         }
-        public string SelectedStream
-        {
-            get;
-            set;
-        }
-
-
         public BatchViewModel()
         {
             GetData();
+            PopulateParticpantComboxValue();
+            PopulateFacultyIDComboboxValue();
+        }
+
+        private void PopulateFacultyIDComboboxValue()
+        {
+            try
+            {
+                FacultyIDCollection = _colFacultyID;
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex.InnerException);
+            }
+        }
+
+        private void PopulateParticpantComboxValue()
+        {
+            try
+            {
+                StreamCollection = new ObservableCollection<string>() { "Science", "Arts", "Commerce"};
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex.InnerException);
+            }
         }
 
         private ObservableCollection<Batch> _Batches = new ObservableCollection<Batch>();
@@ -37,14 +57,6 @@ namespace WpfApp1.ViewModels
             get { return _Batches; }
             set { _Batches = value; }
         }
-
-        private Batch _newBatch = new Batch();
-        public Batch newBatch
-        {
-            get { return _newBatch; }
-            set { _newBatch = value; }
-        }
-
 
         /// <summary>
         /// GetData()
@@ -62,13 +74,16 @@ namespace WpfApp1.ViewModels
                 {
                     _Batches.Add(new Batch { objBatch = batch });
                 }
+                var facultiesID = _dbcontext.FACULTies.ToList();
+                foreach (FACULTY fid in facultiesID)
+                {
+                    _colFacultyID.Add(fid.FacultyID.ToString() + "-" + fid.FacultyName.ToString());
+                }
             }
             catch (Exception ex)
             {
                 exObj.ShowExMsg(ex.InnerException);
-
             }
-
         }
         /// <summary>
         /// GenerateFacultyID()
@@ -92,7 +107,20 @@ namespace WpfApp1.ViewModels
             }
             return bid;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        private ICommand Search;
+        public ICommand SearchBatchCommand
+        {
+            get
+            {
+                if (Search == null)
+                    Search = new RelayCommand(SearchBatch);
+                return Search;
+            }
 
+        }
         /// <summary>
         /// Update faculty
         /// </summary>
@@ -130,17 +158,31 @@ namespace WpfApp1.ViewModels
         /// <summary>
         /// Search faculty
         /// </summary>
-        private ICommand Search;
-        public ICommand SearchBatchCommand
+        private ICommand SelectionChanged;
+        public ICommand FacultyIDChangedCommand
         {
             get
             {
-                if (Search == null)
-                    Search = new RelayCommand(SearchBatch);
-                return Search;
+                if (SelectionChanged == null)
+                    SelectionChanged = new RelayCommand(FacultyIDChanged);
+                return SelectionChanged;
             }
-
         }
+
+        private void FacultyIDChanged()
+        {
+            try
+            {
+                Nullable<int> selectedid = Convert.ToInt16(SelectedFacultyID.ToString().Split('-')[0]);
+                FacultyID = selectedid;
+            }
+            catch (Exception ex)
+            {
+
+                exObj.ShowExMsg(ex.InnerException);
+            }
+        }
+
         private void SearchBatch()
         {
             try
@@ -190,13 +232,14 @@ namespace WpfApp1.ViewModels
         {
             try
             {
-                if (MessageBox.Show("Dp you want to add the new Batch?", "Confirm Add", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Do you want to add the new Batch?", "Confirm Add", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     BATCH _newBatch = new BATCH();
                     _newBatch.BatchID = GenerateBatchID();
                     _newBatch.BatchStartDate = BatchStartDate;
                     _newBatch.BatchEndDate = BatchEndDate;
-                    _newBatch.Stream = SelectedStream;
+                    _newBatch.Stream = (string)Stream;
+                    _newBatch.FacultyID = FacultyID;
                     _dbcontext.BATCHes.Add(_newBatch);
                     _dbcontext.SaveChanges();
                     GetData();

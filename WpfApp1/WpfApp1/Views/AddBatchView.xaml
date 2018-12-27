@@ -12,32 +12,36 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView Name="BatchGrid" Grid.Row="1" Margin="4,160,11.6,13.8" ItemsSource="{Binding Batches}">
+        
+        <Label Content="Provide Batch Details" Grid.Row="0" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lbladdDetails" Width="276" FontWeight="Medium" FontSize="14" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="#FF302C2C" Foreground="#FFF1E7E7" Height="29"/>
+        <Label Content="Batch Start Date" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lblBatchStartDate" VerticalAlignment="Top" Width="auto" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="110,12,0,0" Name="txtBatchStartDate" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=cdrBatchStartDate,Path=SelectedDate,StringFormat=d MMM yyyy}" IsEnabled="False"/>
+        
+        <DatePicker Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="30" Name="cdrBatchStartDate" Margin="300,12,0,0" SelectedDate="{Binding BatchStartDate,StringFormat=dd MMM yyyy,Mode=OneWayToSource}"/>
+        <Label Content="Batch End Date" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,38,0,0" Name="lblBatchEndDate" VerticalAlignment="Top" Width="auto" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="110,38,0,0" Name="txtBatchEndDate" VerticalAlignment="Top" Width="178" Text="{Binding BatchEndDate,StringFormat=dd MMM yyyy}" IsEnabled="False"/>
+        <DatePicker Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="30" Name="cdrBatchEndDate" Margin="300,38,0,0" SelectedDate="{Binding BatchEndDate,StringFormat=dd MMM yyyy,Mode=OneWayToSource}"/>
+        <Label Content="Stream" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,65,0,0" Name="lblStream" VerticalAlignment="Top" Width="78" />
+        <ComboBox Name="cbxStream" HorizontalAlignment="Left" Margin="110,65,0,0" Grid.Row="1" Height="23" VerticalAlignment="Top" Width="178"  
+                 SelectedItem="{Binding Stream}"/>
+        <Label Content="Faculty ID" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,90,0,0" Name="lblFacultiesIDs" VerticalAlignment="Top" Width="78" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="110,92,0,0" Name="txtFacultyID" VerticalAlignment="Top" Width="30" Text="{Binding FacultyID}" IsEnabled="False"/>
+        <ComboBox Name="cbxFacultyID" HorizontalAlignment="Left" Margin="145,92,0,0" Grid.Row="1" Height="23" VerticalAlignment="Top" Width="143"
+                  SelectionChanged="{Binding FacultyIDChangedCommand}" SelectedItem="{Binding SelectedFacultyID}"/>
+        <Button Content="Add" Grid.Row="1" Height="35" HorizontalAlignment="Left" Margin="115,120,0,0" Name="btnAddBatch" 
+                VerticalAlignment="Top" Width="141"
+                Command="{Binding AddBatchCommand}" Grid.Column="0" FontSize="16"  />
+
+        <ListView Name="BatchListView" Grid.Row="1" HorizontalAlignment="Left" Width="750" Margin="12,160,11.6,13.8" ItemsSource="{Binding Batches}">
             <ListView.View>
                 <GridView x:Name="grdTest" >
                     <GridViewColumn Header="Batch Id" DisplayMemberBinding="{Binding BatchID}"  Width="80"/>
                     <GridViewColumn Header="Batch Start Date" DisplayMemberBinding="{Binding BatchStartDate,StringFormat=dd MMM yyyy}"  Width="100" />
                     <GridViewColumn Header="Batch End Date" DisplayMemberBinding="{Binding BatchEndDate,StringFormat=dd MMM yyyy}" Width="100" />
-                    <GridViewColumn Header="Stream" DisplayMemberBinding="{Binding Stream}" Width="100" />
+                    <GridViewColumn Header="Stream" DisplayMemberBinding="{Binding Stream}" Width="auto" />
+                    <GridViewColumn Header="Faculty ID" DisplayMemberBinding="{Binding Qualification}" Width="auto" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Provide Batch Details" Grid.Row="0" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lbladdDetails" Width="276" FontWeight="Medium" FontSize="14" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="#FF302C2C" Foreground="#FFF1E7E7" Height="29"/>
-        <Label Content="Batch Start Date" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lblBatchStartDate" VerticalAlignment="Top" Width="auto" />
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="110,12,0,0" Name="txtBatchStartDate" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=cdrBatchStartDate,Path=SelectedDate,StringFormat=d MMM yyyy}" IsEnabled="False"/>
-        <DatePicker Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="auto" Name="cdrBatchStartDate" Margin="300,12,0,0" SelectedDate="{Binding BatchStartDate,StringFormat=dd MMM yyyy,Mode=OneWayToSource}"/>
-        <Label Content="Batch End Date" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,38,0,0" Name="lblBatchEndDate" VerticalAlignment="Top" Width="auto" />
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="110,38,0,0" Name="txtBatchEndDate" VerticalAlignment="Top" Width="178" Text="{Binding BatchEndDate,StringFormat=dd MMM yyyy}" IsEnabled="False"/>
-        <DatePicker Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="auto" Name="cdrBatchEndDate" Margin="300,38,0,0" SelectedDate="{Binding BatchEndDate,StringFormat=dd MMM yyyy,Mode=OneWayToSource}"/>
-        <Label Content="Stream" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,65,0,0" Name="lblStream" VerticalAlignment="Top" Width="78" />
-        <ComboBox HorizontalAlignment="Left" Margin="110,65,0,0" Grid.Row="1" Height="23" VerticalAlignment="Top" Width="178" SelectedItem="{Binding SelectedStream,Mode=OneWay}">
-            <ComboBoxItem Content="Science"/>
-            <ComboBoxItem Content="Arts"/>
-            <ComboBoxItem Content="Commerce"/>
-        </ComboBox>
-        
-        <Button Content="Add" Grid.Row="1" Height="35" HorizontalAlignment="Left" Margin="115,110,0,0" Name="btnAddBatch" 
-                VerticalAlignment="Top" Width="141"
-                Command="{Binding AddBatchCommand}" Grid.Column="0" FontSize="16"  />
     </Grid>
 </Window>

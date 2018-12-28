@@ -23,6 +23,7 @@
             <ListView.View>
                 <GridView x:Name="grdBatch">
                     <GridViewColumn Header="Batch ID" DisplayMemberBinding="{Binding BatchID}"  Width="auto"/>
+                    <GridViewColumn Header="Batch Description" DisplayMemberBinding="{Binding BatchDescription}"  Width="auto"/>
                     <GridViewColumn Header="Batch Start Date" DisplayMemberBinding="{Binding BatchStartDate}"  Width="auto" />
                     <GridViewColumn Header="Batch End Date" DisplayMemberBinding="{Binding BatchEndDate,StringFormat=dd MMM yyyy}" Width="auto" />
                     <GridViewColumn Header="Stream" DisplayMemberBinding="{Binding Stream}" Width="auto" />

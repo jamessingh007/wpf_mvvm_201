@@ -25,6 +25,7 @@ namespace WpfApp1
         public Nullable<System.DateTime> BatchEndDate { get; set; }
         public string Stream { get; set; }
         public Nullable<int> FacultyID { get; set; }
+        public string BatchDescription { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<PARTICIPANT> PARTICIPANTs { get; set; }

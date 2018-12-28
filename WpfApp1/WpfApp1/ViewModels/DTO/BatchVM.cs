@@ -124,11 +124,27 @@ namespace WpfApp1.ViewModels
             set
             {
                 _SelectedFacultyID = value;
+                FacultyID= Convert.ToInt16(value.ToString().Split('-')[0]); ;
                 OnPropertyChanged("SelectedFacultyID");
 
             }
 
         }
+
+
+        public string BatchDescription
+        {
+            get
+            {
+                return objBatch.BatchDescription;
+            }
+            set
+            {
+                objBatch.BatchDescription = value;
+                OnPropertyChanged("BatchDescription");
+            }
+        }
+        
 
         #region INotifyPropertyChanged members
         public event PropertyChangedEventHandler PropertyChanged;

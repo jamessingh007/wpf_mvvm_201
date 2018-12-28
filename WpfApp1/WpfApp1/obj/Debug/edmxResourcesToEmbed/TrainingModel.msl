@@ -27,6 +27,7 @@
     <EntitySetMapping Name="BATCHes">
       <EntityTypeMapping TypeName="TrainingModel.BATCH">
         <MappingFragment StoreEntitySet="BATCH">
+          <ScalarProperty Name="BatchDescription" ColumnName="BatchDescription" />
           <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
           <ScalarProperty Name="Stream" ColumnName="Stream" />
           <ScalarProperty Name="BatchEndDate" ColumnName="BatchEndDate" />

@@ -9,6 +9,7 @@
     <Property Name="BatchEndDate" Type="date" />
     <Property Name="Stream" Type="varchar" MaxLength="100" />
     <Property Name="FacultyID" Type="int" />
+    <Property Name="BatchDescription" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="FACULTY">
     <Key>

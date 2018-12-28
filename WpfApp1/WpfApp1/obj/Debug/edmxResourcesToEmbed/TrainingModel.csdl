@@ -47,6 +47,7 @@
     <Property Name="FacultyID" Type="Int32" />
     <NavigationProperty Name="PARTICIPANTs" Relationship="TrainingModel.FK_BATCH_PARTICIPANT" FromRole="BATCH" ToRole="PARTICIPANT" />
     <NavigationProperty Name="FACULTY" Relationship="TrainingModel.FK_BatchFaculty" FromRole="BATCH" ToRole="FACULTY" />
+    <Property Name="BatchDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_BATCH_PARTICIPANT">
     <End Type="TrainingModel.BATCH" Role="BATCH" Multiplicity="0..1" />

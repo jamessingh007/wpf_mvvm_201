@@ -14,6 +14,7 @@ namespace WpfApp1.ViewModels
         public ObservableCollection<string> StreamCollection { get; set; }
         public ObservableCollection<string> FacultyIDCollection { get; set; }
         public ObservableCollection<string> _colFacultyID =  new ObservableCollection<string>();
+        private ObservableCollection<Batch> _Batches = new ObservableCollection<Batch>();
 
         public Batch SelectedBatch
         {
@@ -23,7 +24,7 @@ namespace WpfApp1.ViewModels
         public BatchViewModel()
         {
             GetData();
-            PopulateParticpantComboxValue();
+            PopulateStreamComboxValue();
             PopulateFacultyIDComboboxValue();
         }
 
@@ -39,11 +40,11 @@ namespace WpfApp1.ViewModels
             }
         }
 
-        private void PopulateParticpantComboxValue()
+        private void PopulateStreamComboxValue()
         {
             try
             {
-                StreamCollection = new ObservableCollection<string>() { "Science", "Arts", "Commerce"};
+                StreamCollection = new ObservableCollection<string>() { "Development", "Testing", "Cloud"};
             }
             catch (Exception ex)
             {
@@ -51,7 +52,7 @@ namespace WpfApp1.ViewModels
             }
         }
 
-        private ObservableCollection<Batch> _Batches = new ObservableCollection<Batch>();
+        
         public ObservableCollection<Batch> Batches
         {
             get { return _Batches; }
@@ -155,33 +156,33 @@ namespace WpfApp1.ViewModels
             }
         }
 
-        /// <summary>
-        /// Search faculty
-        /// </summary>
-        private ICommand SelectionChanged;
-        public ICommand FacultyIDChangedCommand
-        {
-            get
-            {
-                if (SelectionChanged == null)
-                    SelectionChanged = new RelayCommand(FacultyIDChanged);
-                return SelectionChanged;
-            }
-        }
+        ///// <summary>
+        ///// Search faculty
+        ///// </summary>
+        //private ICommand SelectionChanged;
+        //public ICommand FacultyIDChangedCommand
+        //{
+        //    get
+        //    {
+        //        if (SelectionChanged == null)
+        //            SelectionChanged = new RelayCommand(FacultyIDChanged);
+        //        return SelectionChanged;
+        //    }
+        //}
 
-        private void FacultyIDChanged()
-        {
-            try
-            {
-                Nullable<int> selectedid = Convert.ToInt16(SelectedFacultyID.ToString().Split('-')[0]);
-                FacultyID = selectedid;
-            }
-            catch (Exception ex)
-            {
+        //private void FacultyIDChanged()
+        //{
+        //    try
+        //    {
+        //        Nullable<int> selectedid = Convert.ToInt16(SelectedFacultyID.ToString().Split('-')[0]);
+        //        FacultyID = selectedid;
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                exObj.ShowExMsg(ex.InnerException);
-            }
-        }
+        //        exObj.ShowExMsg(ex.InnerException);
+        //    }
+        //}
 
         private void SearchBatch()
         {
@@ -236,6 +237,7 @@ namespace WpfApp1.ViewModels
                 {
                     BATCH _newBatch = new BATCH();
                     _newBatch.BatchID = GenerateBatchID();
+                    _newBatch.BatchDescription = BatchDescription;
                     _newBatch.BatchStartDate = BatchStartDate;
                     _newBatch.BatchEndDate = BatchEndDate;
                     _newBatch.Stream = (string)Stream;

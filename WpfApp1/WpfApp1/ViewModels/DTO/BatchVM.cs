@@ -6,7 +6,7 @@ namespace WpfApp1.ViewModels
 {
     class Batch : INotifyPropertyChanged
     {
-        public WpfApp1.BATCH objBatch;
+        public BATCH objBatch;
         private string _searchKeyword;
         private string _SelectedFacultyID;
         public Batch()

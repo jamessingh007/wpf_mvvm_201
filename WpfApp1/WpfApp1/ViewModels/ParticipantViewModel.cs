@@ -4,39 +4,53 @@ using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using WpfApp1.Common;
+using WpfApp1.ViewModels.DTO;
 
 namespace WpfApp1.ViewModels
 {
-    class BatchViewModel : Batch
+    class ParticipantViewModel : ParticipantVM
     {
         ExceptionHandling exObj = new ExceptionHandling();
+        public ObservableCollection<BatchCourses> BatchIDCollection { get; set; }
+        public ObservableCollection<string> _batchIDCollection = new ObservableCollection<string>();
         public ObservableCollection<string> StreamCollection { get; set; }
-        public ObservableCollection<string> FacultyIDCollection { get; set; }
-        public ObservableCollection<string> _colFacultyID =  new ObservableCollection<string>();
-        private ObservableCollection<Batch> _Batches = new ObservableCollection<Batch>();
+        private ObservableCollection<ParticipantVM> _Participants = new ObservableCollection<ParticipantVM>();
 
-        public Batch SelectedBatch
+        public ParticipantVM SelectedParticipant
         {
             get;
             set;
         }
-        public BatchViewModel()
+        public ParticipantViewModel()
         {
             GetData();
             PopulateStreamComboxValue();
-            PopulateFacultyIDComboboxValue();
+            PopulateBatchIDComboboxValue();
         }
 
-        private void PopulateFacultyIDComboboxValue()
+        private void PopulateBatchIDComboboxValue()
         {
             try
             {
-                var facultiesID = Common.Courses._dbcontext.FACULTies.ToList();
-                foreach (FACULTY fid in facultiesID)
+                //var batchID = Common.Courses._dbcontext.BATCHes.ToList();
+                //foreach (BATCH bid in batchID)
+                //{
+                //    _batchIDCollection.Add(bid.BatchID.ToString() + "-" + bid.BatchDescription.ToString());
+                //}
+                //BatchIDCollection = _batchIDCollection;
+                var data = Common.Courses._dbcontext.BATCHes.ToList();
+                BatchIDCollection = new ObservableCollection<BatchCourses>();
+                foreach (BATCH bid in data)
                 {
-                    _colFacultyID.Add(fid.FacultyID.ToString() + "-" + fid.FacultyName.ToString());
+                    BatchIDCollection.Add(
+                        new BatchCourses()
+                        {
+                            BatchID = bid.BatchID,
+                            CourseName = bid.BatchDescription
+                        }
+                    );
                 }
-                FacultyIDCollection = _colFacultyID;
             }
             catch (Exception ex)
             {
@@ -56,11 +70,11 @@ namespace WpfApp1.ViewModels
             }
         }
 
-        
-        public ObservableCollection<Batch> Batches
+
+        public ObservableCollection<ParticipantVM> Participants
         {
-            get { return _Batches; }
-            set { _Batches = value; }
+            get { return _Participants; }
+            set { _Participants = value; }
         }
 
         /// <summary>
@@ -70,16 +84,15 @@ namespace WpfApp1.ViewModels
         {
             try
             {
-                if (_Batches.Count > 0)
+                if (_Participants.Count > 0)
                 {
-                    _Batches.Clear();
+                    _Participants.Clear();
                 }
-                var batches = Common.Courses._dbcontext.BATCHes.Take(40).OrderByDescending(o => o.BatchID).ToList();
-                foreach (BATCH batch in batches)
+                var participants = Common.Courses._dbcontext.PARTICIPANTs.Take(40).OrderByDescending(o => o.ParticipantID).ToList();
+                foreach (PARTICIPANT participant in participants)
                 {
-                    _Batches.Add(new Batch { objBatch = batch });
+                    _Participants.Add(new ParticipantVM { objParticipant = participant });
                 }
-                
             }
             catch (Exception ex)
             {
@@ -87,17 +100,17 @@ namespace WpfApp1.ViewModels
             }
         }
         /// <summary>
-        /// GenerateBatchID()
+        /// GenerateParticipantID()
         /// </summary>
         /// <returns></returns>
-        protected int GenerateBatchID()
+        protected int GenerateParticipantID()
         {
             int bid = 0;
             try
             {
-                if (_Batches.Count > 0)
+                if (_Participants.Count > 0)
                 {
-                    bid = _Batches.First().BatchID;
+                    bid = _Participants.First().ParticipantID;
                 }
                 bid++;
             }
@@ -109,15 +122,15 @@ namespace WpfApp1.ViewModels
             return bid;
         }
         /// <summary>
-        /// 
+        /// SearchParticipant
         /// </summary>
         private ICommand Search;
-        public ICommand SearchBatchCommand
+        public ICommand SearchParticipantCommand
         {
             get
             {
                 if (Search == null)
-                    Search = new RelayCommand(SearchBatch);
+                    Search = new RelayCommand(SearchParticipant);
                 return Search;
             }
 
@@ -126,21 +139,22 @@ namespace WpfApp1.ViewModels
         /// Update batch
         /// </summary>
         private ICommand Update;
-        public ICommand UpdateBatchCommand
+        public ICommand UpdateParticipantCommand
         {
             get
             {
                 if (Update == null)
-                    Update = new RelayCommand(UpdateBatchChanges);
+                    Update = new RelayCommand(UpdateParticipantChanges);
                 return Update;
             }
         }
-        private void UpdateBatchChanges()
+        private void UpdateParticipantChanges()
         {
             try
             {
-                if (MessageBox.Show("Dp you want to update the selected Batch?", "Confirm Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Dp you want to update the selected Participant?", "Confirm Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
+
                     Common.Courses._dbcontext.SaveChanges();
                 }
                 else
@@ -155,8 +169,9 @@ namespace WpfApp1.ViewModels
                 exObj.ShowExMsg(ex.InnerException);
             }
         }
-        
-        private void SearchBatch()
+
+
+        private void SearchParticipant()
         {
             try
             {
@@ -165,16 +180,16 @@ namespace WpfApp1.ViewModels
                 {
                     _searchId = Convert.ToInt16(SearchKeyword);
                 }
-                if (_Batches.Count > 0)
+                if (_Participants.Count > 0)
                 {
-                    _Batches.Clear();
+                    _Participants.Clear();
                 }
-                var batches = Common.Courses._dbcontext.BATCHes.Where(x => x.BatchID == _searchId);
-                if (batches.Count() > 0)
+                var participants = Common.Courses._dbcontext.PARTICIPANTs.Where(x => x.ParticipantID == _searchId);
+                if (participants.Count() > 0)
                 {
-                    foreach (BATCH batch in batches)
+                    foreach (PARTICIPANT batch in participants)
                     {
-                        _Batches.Add(new Batch { objBatch = batch });
+                        _Participants.Add(new ParticipantVM { objParticipant = batch });
                     }
                 }
                 else
@@ -189,32 +204,32 @@ namespace WpfApp1.ViewModels
         }
 
         /// <summary>
-        /// ADD batch
+        /// ADD participant
         /// </summary>
         private ICommand Add;
-        public ICommand AddBatchCommand
+        public ICommand AddParticipantCommand
         {
             get
             {
                 if (Add == null)
-                    Add = new RelayCommand(AddBatch);
+                    Add = new RelayCommand(AddParticipant);
                 return Add;
             }
         }
-        private void AddBatch()
+        private void AddParticipant()
         {
             try
             {
-                if (MessageBox.Show("Do you want to add the new Batch?", "Confirm Add", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Do you want to add the new Participant?", "Confirm Add", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    BATCH _newBatch = new BATCH();
-                    _newBatch.BatchID = GenerateBatchID();
-                    _newBatch.BatchDescription = BatchDescription;
-                    _newBatch.BatchStartDate = BatchStartDate;
-                    _newBatch.BatchEndDate = BatchEndDate;
-                    _newBatch.Stream = (string)Stream;
-                    _newBatch.FacultyID = FacultyID;
-                    Common.Courses._dbcontext.BATCHes.Add(_newBatch);
+                    PARTICIPANT _newParticipant = new PARTICIPANT();
+                    _newParticipant.ParticipantID = GenerateParticipantID();
+                    _newParticipant.ParticipantName = ParticipantName;
+                    _newParticipant.DateOfBirth = DateOfBirth;
+                    _newParticipant.CourseRegistered = CourseRegistered;
+                    _newParticipant.BatchID = BatchID;
+                    _newParticipant.DateofRegistration = DateofRegistration;
+                    Common.Courses._dbcontext.PARTICIPANTs.Add(_newParticipant);
                     Common.Courses._dbcontext.SaveChanges();
                     GetData();
                     ClearFills();
@@ -230,9 +245,8 @@ namespace WpfApp1.ViewModels
         {
             try
             {
-                BatchStartDate = null;
-                BatchEndDate = null;
-
+                DateofRegistration = null;
+                DateOfBirth = null;
             }
             catch (Exception ex)
             {
@@ -241,29 +255,29 @@ namespace WpfApp1.ViewModels
         }
 
         /// <summary>
-        /// Delete batch
+        /// Delete Participant
         /// </summary>
         private ICommand Delete;
-        public ICommand DeleteBatchCommand
+        public ICommand DeleteParticipantCommand
         {
             get
             {
                 if (Delete == null)
-                    Delete = new RelayCommand(DeleteBatch);
+                    Delete = new RelayCommand(DeleteParticipant);
                 return Delete;
             }
 
         }
-        private void DeleteBatch()
+        private void DeleteParticipant()
         {
             try
             {
-                if (SelectedBatch != null)
+                if (SelectedParticipant != null)
                 {
-                    if (MessageBox.Show("Dp you want to delete the selected Batch?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Dp you want to delete the selected Participant?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        Common.Courses._dbcontext.BATCHes.Remove(SelectedBatch.objBatch);
-                        Batches.Remove(SelectedBatch);
+                        Common.Courses._dbcontext.PARTICIPANTs.Remove(SelectedParticipant.objParticipant);
+                        _Participants.Remove(SelectedParticipant);
                         Common.Courses._dbcontext.SaveChanges();
                     }
                 }

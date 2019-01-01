@@ -4,16 +4,17 @@ using WpfApp1.ViewModels;
 namespace WpfApp1.Views
 {
     /// <summary>
-    /// Interaction logic for AddParticipantView.xaml
+    /// Interaction logic for SearchParticipant.xaml
     /// </summary>
-    public partial class AddParticipantView : Window
+    public partial class SearchParticipant : Window
     {
-        public AddParticipantView()
+        public SearchParticipant()
         {
             InitializeComponent();
             this.DataContext = new ParticipantViewModel();
-            cbxCourseRegistered.ItemsSource = ((ParticipantViewModel)this.DataContext).StreamCollection;
             //cbxBatchID.ItemsSource = ((ParticipantViewModel)this.DataContext).BatchIDCollection;
+            //cbxCourseRegistered.ItemsSource = ((ParticipantViewModel)this.DataContext).StreamCollection;
         }
+
     }
 }

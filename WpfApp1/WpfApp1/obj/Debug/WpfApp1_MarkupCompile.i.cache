@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\
 WpfApp1
 none
 false
 DEBUG;TRACE
-D:\Github\jamessingh007\wpf_mvvm_201\WpfApp1\WpfApp1\App.xaml
-6-757085650
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\App.xaml
+7-992044112
 2-834434831
-261517099247
-18166574728
-MainWindow.xaml;Views\AddBatchView.xaml;Views\AddFacultyView.xaml;Views\AddParticipantView.xaml;Views\SearchBatchView.xaml;Views\SearchFacultyView.xaml;
+31440598016
+18-1616059756
+MainWindow.xaml;Views\AddBatchView.xaml;Views\AddFacultyView.xaml;Views\AddParticipantView.xaml;Views\SearchBatchView.xaml;Views\SearchFacultyView.xaml;Views\SearchParticipantView.xaml;
 
 True
 

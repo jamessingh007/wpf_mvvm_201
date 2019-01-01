@@ -22,7 +22,6 @@ namespace WpfApp1.ViewModels
     public class FacultyViewModel : Faculty
     {
         ExceptionHandling exObj = new ExceptionHandling();
-        TrainingContext _dbcontext = new TrainingContext();
         public Faculty SelectedFaculty
         {
             get;
@@ -61,7 +60,7 @@ namespace WpfApp1.ViewModels
                 {
                     _Faculties.Clear();
                 }
-                var faculties = _dbcontext.FACULTies.Take(40).OrderByDescending(o => o.FacultyID).ToList();
+                var faculties = Common.Courses._dbcontext.FACULTies.Take(40).OrderByDescending(o => o.FacultyID).ToList();
                 foreach (FACULTY faculty in faculties)
                 {
                     _Faculties.Add(new Faculty { objFaculty = faculty });
@@ -116,11 +115,11 @@ namespace WpfApp1.ViewModels
             {
                 if (MessageBox.Show("Dp you want to update the selected faculty?", "Confirm Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    _dbcontext.SaveChanges();
+                    Common.Courses._dbcontext.SaveChanges();
                 }
                 else
                 {
-                    _dbcontext = new TrainingContext();
+                    Common.Courses._dbcontext = new TrainingContext();
                     GetData();
                 }
             }
@@ -158,7 +157,7 @@ namespace WpfApp1.ViewModels
                 {
                     _Faculties.Clear();
                 }
-                var faculties = _dbcontext.FACULTies.Where(x => x.FacultyName.Contains(SearchKeyword) || x.FacultyID == _searchId);
+                var faculties = Common.Courses._dbcontext.FACULTies.Where(x => x.FacultyName.Contains(SearchKeyword) || x.FacultyID == _searchId);
                 if (faculties.Count() > 0)
                 {
                     foreach (FACULTY faculty in faculties)
@@ -202,8 +201,8 @@ namespace WpfApp1.ViewModels
                     _newFaculty.DateOfBirth = DateOfBirth;
                     _newFaculty.Experience = Experience;
                     _newFaculty.Qualification = Qualification;
-                    _dbcontext.FACULTies.Add(_newFaculty);
-                    _dbcontext.SaveChanges();
+                    Common.Courses._dbcontext.FACULTies.Add(_newFaculty);
+                    Common.Courses._dbcontext.SaveChanges();
                     GetData();
                     ClearFills();
                 }
@@ -251,9 +250,9 @@ namespace WpfApp1.ViewModels
                 {
                     if (MessageBox.Show("Dp you want to delete the selected faculty?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        _dbcontext.FACULTies.Remove(SelectedFaculty.objFaculty);
+                        Common.Courses._dbcontext.FACULTies.Remove(SelectedFaculty.objFaculty);
                         Faculties.Remove(SelectedFaculty);
-                        _dbcontext.SaveChanges();
+                        Common.Courses._dbcontext.SaveChanges();
                     }
                 }
             }

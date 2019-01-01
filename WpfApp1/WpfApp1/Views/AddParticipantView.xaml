@@ -15,37 +15,38 @@
 
         <Label Content="Provide Participant Details" Grid.Row="0" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lbladdDetails" Width="276" FontWeight="Medium" FontSize="14" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="#FF302C2C" Foreground="#FFF1E7E7" Height="29"/>
         <Label Content="Participant Name" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lblParticipantName" VerticalAlignment="Top" Width="auto" />
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="112,12,0,0" Name="txtBatchStartDate" VerticalAlignment="Top" Width="178" Text="{Binding ParticipantName}" IsEnabled="True"/>
-        <!--<DatePicker Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="30" Name="cdrBatchStartDate" Margin="300,12,0,0" SelectedDate="{Binding BatchStartDate,StringFormat=dd MMM yyyy,Mode=OneWayToSource}"/>-->
-
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="112,12,0,0" Name="txtParticipantName" VerticalAlignment="Top" Width="178" Text="{Binding ParticipantName}" IsEnabled="True"/>
+        
         <Label Content="Date of Birth" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="350,12,0,0" Name="lblDob" VerticalAlignment="Top" Width="auto" />
         <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="450,12,0,0" Name="txtDob" VerticalAlignment="Top" Width="178" Text="{Binding DateOfBirth,StringFormat=dd MMM yyyy}" IsEnabled="False"/>
         <DatePicker Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="30" Name="cdrDob" Margin="640,12,0,0" SelectedDate="{Binding DateOfBirth,StringFormat=dd MMM yyyy,Mode=OneWayToSource}"/>
 
-        <Label Content="Batch Description" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,38,0,0" Name="lblBatchDesc" VerticalAlignment="Top" Width="auto" />
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="112,38,0,0" Name="txtBatchDesc" VerticalAlignment="Top" Width="178" Text="{Binding BatchDescription}" IsEnabled="True"/>
+        <Label Content="Batch ID" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,38,0,0" Name="lblBatchID" VerticalAlignment="Top" Width="auto" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="110,38,0,0" Name="txtBatchID" VerticalAlignment="Top" Width="30" 
+                 Text="{Binding BatchID}" IsEnabled="False"/>
+        <ComboBox Name="cbxBatchID" ItemsSource="{Binding BatchIDCollection}" HorizontalAlignment="Left" Margin="145,38,0,0" Grid.Row="1" Height="23" VerticalAlignment="Top" Width="143"
+               SelectedValuePath="BatchID"  SelectedValue="{Binding SelectedBatchID}"   DisplayMemberPath="CourseName"/>
+        <Label Content="Course" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,65,0,0" Name="lblCourseRegistered" VerticalAlignment="Top" Width="78" />
+        <ComboBox Name="cbxCourseRegistered" HorizontalAlignment="Left" Margin="112,65,0,0" Grid.Row="1" Height="23" VerticalAlignment="Top" Width="178"  
+                 SelectedItem="{Binding CourseRegistered}"/>
 
-        <Label Content="Stream" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,65,0,0" Name="lblStream" VerticalAlignment="Top" Width="78" />
-        <ComboBox Name="cbxStream" HorizontalAlignment="Left" Margin="112,65,0,0" Grid.Row="1" Height="23" VerticalAlignment="Top" Width="178"  
-                 SelectedItem="{Binding Stream}"/>
-        <Label Content="Faculty ID" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,90,0,0" Name="lblFacultiesIDs" VerticalAlignment="Top" Width="78" />
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="110,92,0,0" Name="txtFacultyID" VerticalAlignment="Top" Width="30" 
-                 Text="{Binding FacultyID}" IsEnabled="False"/>
-        <ComboBox Name="cbxFacultyID" HorizontalAlignment="Left" Margin="145,92,0,0" Grid.Row="1" Height="23" VerticalAlignment="Top" Width="143"
-                  SelectedItem="{Binding SelectedFacultyID}"/>
-        <Button Content="Add" Grid.Row="1" Height="35" HorizontalAlignment="Left" Margin="115,120,0,0" Name="btnAddBatch" 
+        <Label Content="Registration Date" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="350,65,0,0" Name="lblDateofRegistration" VerticalAlignment="Top" Width="auto" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="450,65,0,0" Name="txtDateofRegistration" VerticalAlignment="Top" Width="178" Text="{Binding DateofRegistration,StringFormat=dd MMM yyyy}" IsEnabled="False"/>
+        <DatePicker Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="30" Name="cdrDateofRegistration" Margin="640,65,0,0" SelectedDate="{Binding DateofRegistration,StringFormat=dd MMM yyyy,Mode=OneWayToSource}"/>
+
+        <Button Content="Add" Grid.Row="1" Height="35" HorizontalAlignment="Left" Margin="115,110,0,0" Name="btnAddParticipant" 
                 VerticalAlignment="Top" Width="141"
-                Command="{Binding AddBatchCommand}" Grid.Column="0" FontSize="16"  />
+                Command="{Binding AddParticipantCommand}" Grid.Column="0" FontSize="16"  />
 
-        <ListView Name="BatchListView" Grid.Row="1" HorizontalAlignment="Left" Width="750" Margin="12,160,11.6,13.8" ItemsSource="{Binding Batches}">
+        <ListView Name="ParticipantListView" Grid.Row="1" HorizontalAlignment="Left" Width="750" Margin="12,160,11.6,13.8" ItemsSource="{Binding Participants}">
             <ListView.View>
                 <GridView x:Name="grdTest" >
-                    <GridViewColumn Header="Batch Id" DisplayMemberBinding="{Binding BatchID}"  Width="80"/>
-                    <GridViewColumn Header="Batch Description" DisplayMemberBinding="{Binding BatchDescription}"  Width="80"/>
-                    <GridViewColumn Header="Batch Start Date" DisplayMemberBinding="{Binding BatchStartDate,StringFormat=dd MMM yyyy}"  Width="100" />
-                    <GridViewColumn Header="Batch End Date" DisplayMemberBinding="{Binding BatchEndDate,StringFormat=dd MMM yyyy}" Width="100" />
-                    <GridViewColumn Header="Stream" DisplayMemberBinding="{Binding Stream}" Width="auto" />
-                    <GridViewColumn Header="Faculty ID" DisplayMemberBinding="{Binding FacultyID}" Width="auto" />
+                    <GridViewColumn Header="Participant ID" DisplayMemberBinding="{Binding ParticipantID}"  Width="auto"/>
+                    <GridViewColumn Header="Participant Name" DisplayMemberBinding="{Binding ParticipantName}"  Width="auto"/>
+                    <GridViewColumn Header="Date Of Birth" DisplayMemberBinding="{Binding DateOfBirth,StringFormat=dd MMM yyyy}"  Width="100" />
+                    <GridViewColumn Header="Batch ID" DisplayMemberBinding="{Binding BatchID}" Width="100" />
+                    <GridViewColumn Header="Course Registered" DisplayMemberBinding="{Binding CourseRegistered}" Width="auto" />
+                    <GridViewColumn Header="Date of Registration" DisplayMemberBinding="{Binding DateofRegistration,StringFormat=dd MMM yyyy}" Width="auto" />
                 </GridView>
             </ListView.View>
         </ListView>

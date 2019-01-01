@@ -66,6 +66,7 @@
     <Compile Include="BATCH.cs">
       <DependentUpon>TrainingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Common\Common.cs" />
     <Compile Include="ExceptionHandling.cs" />
     <Compile Include="FACULTY.cs">
       <DependentUpon>TrainingModel.tt</DependentUpon>
@@ -89,10 +90,13 @@
       <DependentUpon>TrainingModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BatchViewModel.cs" />
+    <Compile Include="ViewModels\DTO\BatchCourses.cs" />
     <Compile Include="ViewModels\DTO\BatchVM.cs" />
     <Compile Include="ViewModels\DTO\FacultyVM.cs" />
+    <Compile Include="ViewModels\DTO\ParticipantVM.cs" />
     <Compile Include="ViewModels\FacultyViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ParticipantViewModel.cs" />
     <Compile Include="Views\AddBatchView.xaml.cs">
       <DependentUpon>AddBatchView.xaml</DependentUpon>
     </Compile>
@@ -107,6 +111,9 @@
     </Compile>
     <Compile Include="Views\SearchFacultyView.xaml.cs">
       <DependentUpon>SearchFacultyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchParticipantView.xaml.cs">
+      <DependentUpon>SearchParticipantView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchFacultyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchParticipantView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

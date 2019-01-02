@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using WpfApp1.Common;
 using WpfApp1.ViewModels.DTO;
 
 namespace WpfApp1.ViewModels
@@ -33,12 +32,6 @@ namespace WpfApp1.ViewModels
         {
             try
             {
-                //var batchID = Common.Courses._dbcontext.BATCHes.ToList();
-                //foreach (BATCH bid in batchID)
-                //{
-                //    _batchIDCollection.Add(bid.BatchID.ToString() + "-" + bid.BatchDescription.ToString());
-                //}
-                //BatchIDCollection = _batchIDCollection;
                 var data = Common.Courses._dbcontext.BATCHes.ToList();
                 BatchIDCollection = new ObservableCollection<BatchCourses>();
                 foreach (BATCH bid in data)
@@ -154,8 +147,8 @@ namespace WpfApp1.ViewModels
             {
                 if (MessageBox.Show("Dp you want to update the selected Participant?", "Confirm Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-
                     Common.Courses._dbcontext.SaveChanges();
+                    MessageBox.Show("Record updated successfully");
                 }
                 else
                 {
@@ -195,6 +188,7 @@ namespace WpfApp1.ViewModels
                 else
                 {
                     MessageBox.Show("No records found.", "Search Result", MessageBoxButton.OK);
+                    GetData();
                 }
             }
             catch (Exception ex)
@@ -232,6 +226,7 @@ namespace WpfApp1.ViewModels
                     Common.Courses._dbcontext.PARTICIPANTs.Add(_newParticipant);
                     Common.Courses._dbcontext.SaveChanges();
                     GetData();
+                    MessageBox.Show("Record added successfully");
                     ClearFills();
                 }
             }
@@ -279,6 +274,7 @@ namespace WpfApp1.ViewModels
                         Common.Courses._dbcontext.PARTICIPANTs.Remove(SelectedParticipant.objParticipant);
                         _Participants.Remove(SelectedParticipant);
                         Common.Courses._dbcontext.SaveChanges();
+                        MessageBox.Show("Record deleted successfully");
                     }
                 }
             }

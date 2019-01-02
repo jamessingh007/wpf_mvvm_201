@@ -8,7 +8,7 @@ namespace WpfApp1.ViewModels
     {
         public PARTICIPANT objParticipant;
         private string _searchKeyword;
-        private string _SelectedBatch;
+        private Nullable<int> _SelectedBatch;
         public ParticipantVM()
         {
             objParticipant = new PARTICIPANT();
@@ -115,7 +115,7 @@ namespace WpfApp1.ViewModels
         }
 
 
-        public string SelectedBatchID
+        public Nullable<int> SelectedBatchID
         {
             get
             {

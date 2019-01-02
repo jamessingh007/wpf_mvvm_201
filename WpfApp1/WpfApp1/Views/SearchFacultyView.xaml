@@ -23,7 +23,7 @@
         <Label Content="Faculty Name" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,35,0,0" Name="lblFacultyName" VerticalAlignment="Top" />
         <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,35,0,0" Name="txtFacultyName" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyListView,Path=SelectedItem.FacultyName}" />
         <Label Content="Date of Birth" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,60,0,0" Name="lblDOB" VerticalAlignment="Top" />
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,62,0,0" Name="txtDOB" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyListView,Path=SelectedItem.DateOfBirth}" />
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,62,0,0" Name="txtDOB" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyListView,Path=SelectedItem.DateOfBirth,StringFormat=dd MMM yyyy}" />
         <Label Content="Experience" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,86,0,0" x:Name="lblExperience" VerticalAlignment="Top" />
         <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="100,88,0,0" x:Name="txtCountry" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=FacultyListView,Path=SelectedItem.Experience}" />
         <Label Content="Qualification" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="12,113,0,0" x:Name="lblQualification" VerticalAlignment="Top" />

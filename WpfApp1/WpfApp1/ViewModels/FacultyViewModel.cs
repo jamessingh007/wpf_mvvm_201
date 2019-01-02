@@ -116,6 +116,7 @@ namespace WpfApp1.ViewModels
                 if (MessageBox.Show("Dp you want to update the selected faculty?", "Confirm Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     Common.Courses._dbcontext.SaveChanges();
+                    MessageBox.Show("Record updated successfully");
                 }
                 else
                 {
@@ -148,7 +149,8 @@ namespace WpfApp1.ViewModels
         {
             try
             {
-                int _searchId = 0; 
+                int _searchId = 0;
+                bool isId = false;
                 if (SearchKeyword.All(char.IsDigit))
                 {
                     _searchId = Convert.ToInt16(SearchKeyword);
@@ -157,7 +159,8 @@ namespace WpfApp1.ViewModels
                 {
                     _Faculties.Clear();
                 }
-                var faculties = Common.Courses._dbcontext.FACULTies.Where(x => x.FacultyName.Contains(SearchKeyword) || x.FacultyID == _searchId);
+                var faculties = Common.Courses._dbcontext.FACULTies.Where(x => x.FacultyName.Contains(SearchKeyword) || x.FacultyID == _searchId).ToList();
+                
                 if (faculties.Count() > 0)
                 {
                     foreach (FACULTY faculty in faculties)
@@ -168,6 +171,7 @@ namespace WpfApp1.ViewModels
                 else
                 {
                     MessageBox.Show("No records found.", "Search Result",MessageBoxButton.OK);
+                    GetData();
                 }
             }
             catch (Exception ex)
@@ -204,6 +208,7 @@ namespace WpfApp1.ViewModels
                     Common.Courses._dbcontext.FACULTies.Add(_newFaculty);
                     Common.Courses._dbcontext.SaveChanges();
                     GetData();
+                    MessageBox.Show("Record added successfully");
                     ClearFills();
                 }
             }
@@ -253,6 +258,7 @@ namespace WpfApp1.ViewModels
                         Common.Courses._dbcontext.FACULTies.Remove(SelectedFaculty.objFaculty);
                         Faculties.Remove(SelectedFaculty);
                         Common.Courses._dbcontext.SaveChanges();
+                        MessageBox.Show("Record deleted successfully");
                     }
                 }
             }

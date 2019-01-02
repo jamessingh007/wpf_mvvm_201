@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using WpfApp1.ViewModels;
 
 namespace WpfApp1.Views
@@ -11,9 +12,24 @@ namespace WpfApp1.Views
         public AddParticipantView()
         {
             InitializeComponent();
-            this.DataContext = new ParticipantViewModel();
-            cbxCourseRegistered.ItemsSource = ((ParticipantViewModel)this.DataContext).StreamCollection;
-            //cbxBatchID.ItemsSource = ((ParticipantViewModel)this.DataContext).BatchIDCollection;
+            SetDataContext();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        internal void SetDataContext()
+        {
+            ExceptionHandling exObj = new ExceptionHandling();
+            try
+            {
+                this.DataContext = new ParticipantViewModel();
+                cbxCourseRegistered.ItemsSource = ((ParticipantViewModel)this.DataContext).StreamCollection;
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex);
+            }
+
         }
     }
 }

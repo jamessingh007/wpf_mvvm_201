@@ -3,23 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1.Views"
+        xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="SearchBatchView" Height="450" Width="800">
+        Title="SearchBatchView" Height="690" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <Label Content="Enter BatchID" Grid.Row="0" HorizontalAlignment="Left" Margin="14,12,0,0" Name="lblsearchKeyword" Background="#FF191818" Foreground="#FFF1EEEE" VerticalAlignment="Top"/>
         <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="14,7,0,0" Name="txtsearchkeyword" VerticalAlignment="Top" Width="220" Text="{Binding SearchKeyword}"/>
         <Button Content="Search" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="240,7,0,0" Name="btnSearch" 
                 VerticalAlignment="Top" Width="70"
                 Command="{Binding SearchBatchCommand}"/>
         <Label Content="Batch Details" Grid.Row="1" HorizontalAlignment="Left" Margin="14,35,0,0" Name="lblBatchResults" Background="#FF191818" Foreground="#FFF1EEEE" VerticalAlignment="Top"/>
-        <ListView Name="BatchListView" Grid.Row="1" HorizontalAlignment="Left" Margin="14,65,12,0" VerticalAlignment="Top" ItemsSource="{Binding Batches}" SelectedItem="{Binding SelectedBatch}" Width="750" Height="50">
+        <ListView Name="BatchListView" Grid.Row="1" HorizontalAlignment="Left" Margin="14,65,0,0" VerticalAlignment="Top" ItemsSource="{Binding Batches}" SelectedItem="{Binding SelectedBatch}" Width="750" Height="159">
             <ListView.View>
                 <GridView x:Name="grdBatch">
                     <GridViewColumn Header="Batch ID" DisplayMemberBinding="{Binding BatchID}"  Width="auto"/>
@@ -31,14 +31,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Update" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="14,120,0,0" Name="btnUpdate" 
-                VerticalAlignment="Top" Width="119"/>
-        <Button Content="Delete" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="160,120,0,0" Name="btnDelete" 
+        <Button Content="Delete" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="10,229,0,0" Name="btnDelete" 
                 VerticalAlignment="Top" Width="119"
                 Command="{Binding DeleteBatchCommand}" CommandParameter="{Binding ElementName=BatchListView,Path=SelectedItem.BatchID}" />
 
-        <Label Content="Particpants Details" Grid.Row="1" HorizontalAlignment="Left" Margin="14,150,0,0" Name="lblParticpantResults" Background="#FF191818" Foreground="#FFF1EEEE" VerticalAlignment="Top"/>
-        <ListView Name="ParticipantsListView" Grid.Row="1" HorizontalAlignment="Left" Margin="14,178,12,40"  ItemsSource="{Binding Participants}" SelectedItem="{Binding SelectedParticpants}" Width="750">
+        <Label Content="Particpants Details" Grid.Row="1" HorizontalAlignment="Left" Margin="10,257,0,0" Name="lblParticpantResults" Background="#FF191818" Foreground="#FFF1EEEE" VerticalAlignment="Top"/>
+        <ListView Name="ParticipantsListView" Grid.Row="1" HorizontalAlignment="Left" Margin="14,288,0,40"  ItemsSource="{Binding Participants}" SelectedItem="{Binding SelectedParticpants}" Width="750">
             <ListView.View>
                 <GridView x:Name="grdParticpant">
                     <GridViewColumn Header="Participant ID" DisplayMemberBinding="{Binding ParticipantID}"  Width="auto"/>
@@ -46,11 +44,11 @@
                     <GridViewColumn Header="DOB" DisplayMemberBinding="{Binding DateOfBirth,StringFormat=dd MMM yyyy}" Width="auto" />
                     <GridViewColumn Header="Stream" DisplayMemberBinding="{Binding CourseRegistered}" Width="auto" />
                     <GridViewColumn Header="Batch ID" DisplayMemberBinding="{Binding BatchID}" Width="auto" />
-                    <GridViewColumn Header="Date of Registration" DisplayMemberBinding="{Binding DateofRegistration}" Width="auto" />
+                    <GridViewColumn Header="Date of Registration" DisplayMemberBinding="{Binding DateofRegistration, StringFormat=dd MMM yyyy}" Width="auto" />
                 </GridView>
             </ListView.View>
         </ListView>
         <Button Content="Add Particpant" Grid.Row="1" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="14,0,0,10" Name="btnAddParticipant" 
-                Width="119"/>
+                Command="{Binding ShowAddParticipantCommand}" Width="119"/>
     </Grid>
 </Window>

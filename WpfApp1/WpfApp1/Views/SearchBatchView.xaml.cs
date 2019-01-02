@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using WpfApp1.ViewModels;
 namespace WpfApp1.Views
 {
@@ -10,7 +11,23 @@ namespace WpfApp1.Views
         public SearchBatchView()
         {
             InitializeComponent();
-            this.DataContext = new BatchViewModel();
+            SetDataContext();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        internal void SetDataContext()
+        {
+            ExceptionHandling exObj = new ExceptionHandling();
+            try
+            {
+                this.DataContext = new BatchViewModel();
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex);
+            }
+
         }
     }
 }

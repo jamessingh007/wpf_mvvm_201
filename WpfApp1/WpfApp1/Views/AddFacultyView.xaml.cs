@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using WpfApp1.ViewModels;
 
 namespace WpfApp1.Views
@@ -11,7 +12,22 @@ namespace WpfApp1.Views
         public AddFacultyView()
         {
             InitializeComponent();
-            this.DataContext = new FacultyViewModel();
+            SetDataContext();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        internal void SetDataContext()
+        {
+            ExceptionHandling exObj = new ExceptionHandling();
+            try
+            {
+                this.DataContext = new FacultyViewModel();
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex);
+            }
 
         }
     }

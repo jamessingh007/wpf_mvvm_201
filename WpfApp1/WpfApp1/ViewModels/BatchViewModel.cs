@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using WpfApp1.Views;
 
 namespace WpfApp1.ViewModels
 {
@@ -14,6 +15,7 @@ namespace WpfApp1.ViewModels
         public ObservableCollection<string> FacultyIDCollection { get; set; }
         public ObservableCollection<string> _colFacultyID =  new ObservableCollection<string>();
         private ObservableCollection<Batch> _Batches = new ObservableCollection<Batch>();
+        private ObservableCollection<ParticipantVM> _Participants = new ObservableCollection<ParticipantVM>();
 
         public Batch SelectedBatch
         {
@@ -63,6 +65,12 @@ namespace WpfApp1.ViewModels
             set { _Batches = value; }
         }
 
+        public ObservableCollection<ParticipantVM> Participants
+        {
+            get { return _Participants; }
+            set { _Participants = value; }
+        }
+
         /// <summary>
         /// GetData()
         /// </summary>
@@ -108,8 +116,28 @@ namespace WpfApp1.ViewModels
             }
             return bid;
         }
+
         /// <summary>
-        /// 
+        /// show add participant view
+        /// </summary>
+        private ICommand _ShowAddParticipant;
+        public ICommand ShowAddParticipantCommand
+        {
+            get
+            {
+                if (_ShowAddParticipant == null)
+                    _ShowAddParticipant = new RelayCommand(ShowAddParticipant);
+                return _ShowAddParticipant;
+            }
+        }
+
+        private void ShowAddParticipant()
+        {
+            AddParticipantView obj = new AddParticipantView();
+            obj.Show();
+        }
+        /// <summary>
+        /// Search
         /// </summary>
         private ICommand Search;
         public ICommand SearchBatchCommand
@@ -122,6 +150,52 @@ namespace WpfApp1.ViewModels
             }
 
         }
+
+        private void SearchBatch()
+        {
+            try
+            {
+                int _searchId = 0;
+                if (SearchKeyword.All(char.IsDigit))
+                {
+                    _searchId = Convert.ToInt16(SearchKeyword);
+                }
+                if (_Batches.Count > 0)
+                {
+                    _Batches.Clear();
+                }
+                var batches = Common.Courses._dbcontext.BATCHes.Where(x => x.BatchID == _searchId);
+                if (batches.Count() > 0)
+                {
+                    foreach (BATCH batch in batches)
+                    {
+                        _Batches.Add(new Batch { objBatch = batch });
+                        var participants = Common.Courses._dbcontext.PARTICIPANTs.Where(x => x.BatchID == _searchId);
+                        if (participants.Count() > 0)
+                        {
+                            foreach (PARTICIPANT participant in participants)
+                            {
+                                _Participants.Add(new ParticipantVM { objParticipant = participant });
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No participants present in this batch.", "Search Result", MessageBoxButton.OK);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No records found.", "Search Result", MessageBoxButton.OK);
+                    GetData();
+                }
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex.InnerException);
+            }
+        }
+
         /// <summary>
         /// Update batch
         /// </summary>
@@ -142,6 +216,7 @@ namespace WpfApp1.ViewModels
                 if (MessageBox.Show("Dp you want to update the selected Batch?", "Confirm Update", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     Common.Courses._dbcontext.SaveChanges();
+                    MessageBox.Show("Record updated successfully");
                 }
                 else
                 {
@@ -155,38 +230,10 @@ namespace WpfApp1.ViewModels
                 exObj.ShowExMsg(ex.InnerException);
             }
         }
+
+
         
-        private void SearchBatch()
-        {
-            try
-            {
-                int _searchId = 0;
-                if (SearchKeyword.All(char.IsDigit))
-                {
-                    _searchId = Convert.ToInt16(SearchKeyword);
-                }
-                if (_Batches.Count > 0)
-                {
-                    _Batches.Clear();
-                }
-                var batches = Common.Courses._dbcontext.BATCHes.Where(x => x.BatchID == _searchId);
-                if (batches.Count() > 0)
-                {
-                    foreach (BATCH batch in batches)
-                    {
-                        _Batches.Add(new Batch { objBatch = batch });
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No records found.", "Search Result", MessageBoxButton.OK);
-                }
-            }
-            catch (Exception ex)
-            {
-                exObj.ShowExMsg(ex.InnerException);
-            }
-        }
+        
 
         /// <summary>
         /// ADD batch
@@ -217,6 +264,7 @@ namespace WpfApp1.ViewModels
                     Common.Courses._dbcontext.BATCHes.Add(_newBatch);
                     Common.Courses._dbcontext.SaveChanges();
                     GetData();
+                    MessageBox.Show("Record added successfully");
                     ClearFills();
                 }
             }
@@ -265,6 +313,7 @@ namespace WpfApp1.ViewModels
                         Common.Courses._dbcontext.BATCHes.Remove(SelectedBatch.objBatch);
                         Batches.Remove(SelectedBatch);
                         Common.Courses._dbcontext.SaveChanges();
+                        MessageBox.Show("Record deleted successfully");
                     }
                 }
             }

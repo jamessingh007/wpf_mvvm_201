@@ -14,9 +14,9 @@ namespace WpfApp1
     
     public partial class PARTICIPANT
     {
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
         public int ParticipantID { get; set; }
         public string ParticipantName { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
         public Nullable<int> BatchID { get; set; }
         public string CourseRegistered { get; set; }
         public Nullable<System.DateTime> DateofRegistration { get; set; }

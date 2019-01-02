@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using WpfApp1.ViewModels;
 
 namespace WpfApp1.Views
@@ -6,14 +7,28 @@ namespace WpfApp1.Views
     /// <summary>
     /// Interaction logic for SearchParticipant.xaml
     /// </summary>
-    public partial class SearchParticipant : Window
+    public partial class SearchParticipantView : Window
     {
-        public SearchParticipant()
+        public SearchParticipantView()
         {
             InitializeComponent();
-            this.DataContext = new ParticipantViewModel();
-            //cbxBatchID.ItemsSource = ((ParticipantViewModel)this.DataContext).BatchIDCollection;
-            //cbxCourseRegistered.ItemsSource = ((ParticipantViewModel)this.DataContext).StreamCollection;
+            SetDataContext();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        internal void SetDataContext()
+        {
+            ExceptionHandling exObj = new ExceptionHandling();
+            try
+            {
+                this.DataContext = new ParticipantViewModel();
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex);
+            }
+
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using WpfApp1.ViewModels;
 
 namespace WpfApp1.Views
@@ -11,9 +12,25 @@ namespace WpfApp1.Views
         public AddBatchView()
         {
             InitializeComponent();
-            this.DataContext = new BatchViewModel();
-            cbxStream.ItemsSource = ((BatchViewModel)this.DataContext).StreamCollection;
-            cbxFacultyID.ItemsSource = ((BatchViewModel)this.DataContext).FacultyIDCollection;
+            SetDataContext();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        internal void SetDataContext()
+        {
+            ExceptionHandling exObj = new ExceptionHandling();
+            try
+            {
+                this.DataContext = new BatchViewModel();
+                cbxStream.ItemsSource = ((BatchViewModel)this.DataContext).StreamCollection;
+                cbxFacultyID.ItemsSource = ((BatchViewModel)this.DataContext).FacultyIDCollection;
+            }
+            catch (Exception ex)
+            {
+                exObj.ShowExMsg(ex);
+            }
+
         }
     }
 }

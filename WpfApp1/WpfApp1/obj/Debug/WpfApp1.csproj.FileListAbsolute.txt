@@ -62,3 +62,5 @@ C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\AddPa
 C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchBatchView.baml
 C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchParticipantView.g.cs
 C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\SearchParticipantView.baml
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\LoginView.g.cs
+C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\obj\Debug\Views\LoginView.baml

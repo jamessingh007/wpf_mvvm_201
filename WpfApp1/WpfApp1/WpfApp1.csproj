@@ -63,6 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ADMIN.cs">
+      <DependentUpon>TrainingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="BATCH.cs">
       <DependentUpon>TrainingModel.tt</DependentUpon>
     </Compile>
@@ -106,6 +109,9 @@
     <Compile Include="Views\AddParticipantView.xaml.cs">
       <DependentUpon>AddParticipantView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SearchBatchView.xaml.cs">
       <DependentUpon>SearchBatchView.xaml</DependentUpon>
     </Compile>
@@ -136,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddParticipantView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -28,5 +28,6 @@ namespace WpfApp1
         public virtual DbSet<FACULTY> FACULTies { get; set; }
         public virtual DbSet<PARTICIPANT> PARTICIPANTs { get; set; }
         public virtual DbSet<BATCH> BATCHes { get; set; }
+        public virtual DbSet<ADMIN> ADMINs { get; set; }
     }
 }

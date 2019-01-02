@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TrainingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="BATCH">
           <Key>
             <PropertyRef Name="BatchID" />
@@ -62,6 +69,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TrainingModelStoreContainer">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BATCH" EntityType="Self.BATCH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FACULTY" EntityType="Self.FACULTY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PARTICIPANT" EntityType="Self.PARTICIPANT" Schema="dbo" store:Type="Tables" />
@@ -113,6 +121,7 @@
             <End Role="FACULTY" EntitySet="FACULTies" />
             <End Role="BATCH" EntitySet="BATCHes" />
           </AssociationSet>
+          <EntitySet Name="ADMINs" EntityType="TrainingModel.ADMIN" />
           </EntityContainer>
         <EntityType Name="BATCH">
           <Key>
@@ -151,6 +160,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -189,6 +205,14 @@
                 <ScalarProperty Name="BatchEndDate" ColumnName="BatchEndDate" />
                 <ScalarProperty Name="BatchStartDate" ColumnName="BatchStartDate" />
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADMINs">
+            <EntityTypeMapping TypeName="TrainingModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\THIS PC\Source\Repos\wpf_mvvm_201\WpfApp1\WpfApp1\App.xaml
-7-992044112
+82096183226
 2-834434831
-31440598016
+33469677268
 18-1616059756
-MainWindow.xaml;Views\AddBatchView.xaml;Views\AddFacultyView.xaml;Views\AddParticipantView.xaml;Views\SearchBatchView.xaml;Views\SearchFacultyView.xaml;Views\SearchParticipantView.xaml;
+MainWindow.xaml;Views\AddBatchView.xaml;Views\AddFacultyView.xaml;Views\AddParticipantView.xaml;Views\LoginView.xaml;Views\SearchBatchView.xaml;Views\SearchFacultyView.xaml;Views\SearchParticipantView.xaml;
 
 True
 

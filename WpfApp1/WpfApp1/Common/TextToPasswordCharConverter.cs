@@ -14,7 +14,9 @@ namespace WpfApp1.Common
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            
+
+            if (true)
+            { }
             LoginVM.EnteredKey = value.ToString().Substring(value.ToString().Length - 1);
                 return new String('*', value?.ToString().Length ?? 0);
             

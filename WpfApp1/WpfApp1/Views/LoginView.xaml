@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.Views"
         mc:Ignorable="d"
-        Title="LoginView" Height="450" Width="800">
+        xmlns:ff="clr-namespace:WpfApp1.Common"    
+        Title="Mindtree 201 WPF MVVM" Height="450" Width="800">
+    
     <Grid>
         <Label Content="Login" HorizontalAlignment="Left" Margin="321,47,0,0" VerticalAlignment="Top" Height="66" Width="109" FontSize="36"/>
-        <TextBox HorizontalAlignment="Left" Height="41" Margin="269,113,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="226" VerticalContentAlignment="Center" FontSize="24"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="269,159,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24"/>
-        <Button Content="Login
-" HorizontalAlignment="Left" Margin="269,225,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24"/>
+        <TextBox Name="txtUsername" HorizontalAlignment="Left" Height="41" Margin="269,113,0,0" TextWrapping="Wrap" ToolTip="Username" Text="{Binding Username}" VerticalAlignment="Top" Width="226" VerticalContentAlignment="Center" FontSize="24"/>
+        <PasswordBox Name="pwdPassword" ToolTip="Password" HorizontalAlignment="Left" Margin="269,159,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24"         />
+        <Button Content="Login" HorizontalAlignment="Left" Margin="269,225,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24" 
+                Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=pwdPassword}"/>
     </Grid>
 </Window>

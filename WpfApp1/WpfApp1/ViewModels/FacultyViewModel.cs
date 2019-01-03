@@ -1,24 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//using WpfApp1.ViewModels.DTO;
-using System.Data.Entity;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
+using System.Data.Entity;
+using System.Linq;
 using System.Windows;
-using WpfApp1.Views;
-using System.Data.SqlClient;
+using System.Windows.Input;
 
 
 
 
 namespace WpfApp1.ViewModels
 {
-    
+
     public class FacultyViewModel : Faculty
     {
         ExceptionHandling exObj = new ExceptionHandling();

@@ -3,14 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1.Views"
+        xmlns:common="clr-namespace:WpfApp1.Common"
         mc:Ignorable="d"
-        Title="LoginView" Height="450" Width="800">
+        Title="WPF 201 - Mindtree" Height="450" Width="800">
+    <Window.Resources>
+        <common:TextToPasswordCharConverter x:Key="TextToPasswordCharConverter"/>
+    </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="/Images/logoBG.png"></ImageBrush>
+    </Window.Background>
     <Grid>
         <Label Content="Login" HorizontalAlignment="Left" Margin="321,47,0,0" VerticalAlignment="Top" Height="66" Width="109" FontSize="36"/>
-        <TextBox HorizontalAlignment="Left" Height="41" Margin="269,113,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="226" VerticalContentAlignment="Center" FontSize="24"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="269,159,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24"/>
-        <Button Content="Login
-" HorizontalAlignment="Left" Margin="269,225,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24"/>
+       
+        <TextBox Name="txtUsername" HorizontalAlignment="Left" Height="41" Margin="269,113,0,0" TextWrapping="Wrap" ToolTip="Username" VerticalAlignment="Top" Width="226" VerticalContentAlignment="Center" FontSize="24"
+                 Text="{Binding Username}"/>
+        <TextBox  HorizontalAlignment="Left" ToolTip="Password" Background="Transparent"  Margin="269,159,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24" 
+                 Text="{Binding Password, Converter={StaticResource TextToPasswordCharConverter}, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Submit" HorizontalAlignment="Left" Margin="269,225,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24"
+                Command="{Binding LoginCommmand}"/>
     </Grid>
 </Window>

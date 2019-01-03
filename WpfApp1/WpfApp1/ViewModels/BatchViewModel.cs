@@ -155,6 +155,10 @@ namespace WpfApp1.ViewModels
         {
             try
             {
+                if (_Participants.Count() > 0)
+                {
+                    _Participants.Clear();
+                }
                 int _searchId = 0;
                 if (SearchKeyword.All(char.IsDigit))
                 {

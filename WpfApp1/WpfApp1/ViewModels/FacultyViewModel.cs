@@ -250,6 +250,7 @@ namespace WpfApp1.ViewModels
                         Common.Courses._dbcontext.FACULTies.Remove(SelectedFaculty.objFaculty);
                         Faculties.Remove(SelectedFaculty);
                         Common.Courses._dbcontext.SaveChanges();
+                        GetData();
                         MessageBox.Show("Record deleted successfully");
                     }
                 }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:WpfApp1.ViewModels"
         mc:Ignorable="d"
-        Title="Add Faculty" Height="540" Width="800">
+        Title="Add Faculty" Height="540" Width="800"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Margin="10,10,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

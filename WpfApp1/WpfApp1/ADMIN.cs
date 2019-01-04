@@ -9,7 +9,9 @@
 
 namespace WpfApp1
 {
-
+    using System;
+    using System.Collections.ObjectModel;
+    
     public partial class ADMIN
     {
         public string Username { get; set; }

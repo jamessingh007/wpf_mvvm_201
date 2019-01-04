@@ -68,6 +68,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FKDelete_BatchFaculty">
+          <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BATCH" Type="Self.BATCH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACULTY">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="BATCH">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="TrainingModelStoreContainer">
           <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BATCH" EntityType="Self.BATCH" Schema="dbo" store:Type="Tables" />
@@ -78,6 +92,10 @@
             <End Role="PARTICIPANT" EntitySet="PARTICIPANT" />
           </AssociationSet>
           <AssociationSet Name="FK_BatchFaculty" Association="Self.FK_BatchFaculty">
+            <End Role="FACULTY" EntitySet="FACULTY" />
+            <End Role="BATCH" EntitySet="BATCH" />
+          </AssociationSet>
+          <AssociationSet Name="FKDelete_BatchFaculty" Association="Self.FKDelete_BatchFaculty">
             <End Role="FACULTY" EntitySet="FACULTY" />
             <End Role="BATCH" EntitySet="BATCH" />
           </AssociationSet>

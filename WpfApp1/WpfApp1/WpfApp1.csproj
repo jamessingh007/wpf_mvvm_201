@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\TextToPasswordCharConverter.cs" />
+    <Compile Include="Common\VisibilityConverter.cs" />
     <Compile Include="ExceptionHandling.cs" />
     <Compile Include="FACULTY.cs">
       <DependentUpon>TrainingModel.tt</DependentUpon>
@@ -205,6 +206,10 @@
   <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\logoBG.png" />
+    <Resource Include="Images\faculty.png" />
+    <Resource Include="Images\batch.png" />
+    <Resource Include="Images\participant.png" />
+    <Resource Include="Images\logoBGsmall.png" />
     <Content Include="TrainingModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TrainingModel.edmx</DependentUpon>

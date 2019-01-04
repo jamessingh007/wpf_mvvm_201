@@ -5,21 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:common="clr-namespace:WpfApp1.Common"
         mc:Ignorable="d"
-        Title="WPF 201 - Mindtree" Height="450" Width="800">
+        Title="WPF 201 - Mindtree" Height="450" Width="500"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Visibility="{Binding WindowlVisible, Mode=TwoWay}"
+        >
     <Window.Resources>
         <common:TextToPasswordCharConverter x:Key="TextToPasswordCharConverter"/>
+        <BooleanToVisibilityConverter x:Key="Converter" />
     </Window.Resources>
-    <Window.Background>
-        <ImageBrush ImageSource="/Images/logoBG.png"></ImageBrush>
-    </Window.Background>
+
     <Grid>
-        <Label Content="Login" HorizontalAlignment="Left" Margin="321,47,0,0" VerticalAlignment="Top" Height="66" Width="109" FontSize="36"/>
-       
-        <TextBox Name="txtUsername" HorizontalAlignment="Left" Height="41" Margin="269,113,0,0" TextWrapping="Wrap" ToolTip="Username" VerticalAlignment="Top" Width="226" VerticalContentAlignment="Center" FontSize="24"
+        <Label Content="Login" HorizontalAlignment="Center" Margin="0,141,0,0" VerticalAlignment="Top" Height="66" Width="109" FontSize="36"/>
+        <TextBox Name="txtUsername" HorizontalAlignment="Center" Height="41" Margin="0,207,0,0" TextWrapping="Wrap" ToolTip="Username" VerticalAlignment="Top" Width="226" VerticalContentAlignment="Center" FontSize="24"
                  Text="{Binding Username}"/>
-        <TextBox  HorizontalAlignment="Left" ToolTip="Password" Background="Transparent"  Margin="269,159,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24" 
+        <TextBox  HorizontalAlignment="Center" ToolTip="Password" Background="Transparent"  Margin="0,253,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24" 
                  Text="{Binding Password, Converter={StaticResource TextToPasswordCharConverter}, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Submit" HorizontalAlignment="Left" Margin="269,225,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24"
-                Command="{Binding LoginCommmand}"/>
+        <Button Content="Submit" HorizontalAlignment="Center" Margin="0,319,0,0" VerticalAlignment="Top" Width="226" Height="41" FontSize="24"
+                Command="{Binding LoginCommmand}"
+                Background="CornflowerBlue" Foreground="White"/>
+        <Image HorizontalAlignment="Center" Height="106" Margin="0,35,0,0" VerticalAlignment="Top" Width="136" Source="/WpfApp1;component/Images/logoBGsmall.png"/>
+        <Label Content="Wrong username or password*" HorizontalAlignment="Center" Margin="134,296,134,0" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Height="23" FontSize="10" Width="226"
+               Foreground="Red" Visibility="{Binding BadCredentials,Mode=TwoWay}" FontWeight="Bold"/>
     </Grid>
 </Window>

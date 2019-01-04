@@ -5,31 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Training" Height="450" Width="800">
+        Title="Main Menu" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Closed="Window_Closed"
+        >
     <Grid Height="auto" Width="auto">
-        <TabControl HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="575*"/>
+            <ColumnDefinition Width="219*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="auto" Grid.ColumnSpan="2">
             <TabItem Header="Faculty">
-                <Grid Background="#FFE5E5E5" Height="450" Width="800" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="79*"/>
-                        <ColumnDefinition Width="722*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="btnAddFaculty" Content="Add Faculty" HorizontalAlignment="Center" Margin="253.5,138,274,0" VerticalAlignment="Top" Width="194" Command="{Binding ShowAddFacultyCommand}" Grid.Column="1"/>
-                    <Button x:Name="btnSearchFaculty" Content="Search Faculty" HorizontalAlignment="Center" Margin="253.5,186,274,0" VerticalAlignment="Top" Width="194" Command="{Binding ShowSearchFacultyCommand}" Grid.Column="1"/>
+                <Grid Background="White" Height="471" Width="798" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Button x:Name="btnAddFaculty" Content="Add Faculty" HorizontalAlignment="Right" Margin="0,138,50,0" VerticalAlignment="Top" Width="332" Height="41" Command="{Binding ShowAddFacultyCommand}"
+                            FontSize="24" Background="CornflowerBlue" Foreground="White"/>
+                    <Button x:Name="btnSearchFaculty" Content="Search/Update/Delete Faculty" HorizontalAlignment="Right" Margin="0,186,50,0" VerticalAlignment="Top" Width="332" Height="41" Command="{Binding ShowSearchFacultyCommand}"
+                            FontSize="24" Background="CornflowerBlue" Foreground="White"/>
+                    <Image HorizontalAlignment="Left" Height="270" Margin="50,59,0,0" VerticalAlignment="Top" Width="310" Source="Images/faculty.png"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Batch">
-                <Grid Background="#FFE5E5E5" Height="471" Width="796" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Button Content="Add Batch" HorizontalAlignment="Center" Margin="58,138,0,0" VerticalAlignment="Top" Width="194" Command="{Binding ShowAddBatchCommand}"/>
-                    <Button Content="Search Batch" HorizontalAlignment="Center" Margin="58,186,0,0" VerticalAlignment="Top" Width="194" Command="{Binding ShowSearchBatchCommand}"/>
+                <Grid Background="White" Height="471" Width="796" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Button Content="Add Batch" HorizontalAlignment="Right" Margin="0,138,54,0" VerticalAlignment="Top" Width="296" Height="41" Command="{Binding ShowAddBatchCommand}"
+                            FontSize="24" Background="CornflowerBlue" Foreground="White"/>
+                    <Button Content="Search/Delete Batch" HorizontalAlignment="Right" Margin="0,186,54,0" VerticalAlignment="Top" Width="296" Height="41" Command="{Binding ShowSearchBatchCommand}"
+                            FontSize="24" Background="CornflowerBlue" Foreground="White"/>
+                    <Image HorizontalAlignment="Left" Height="290" Margin="52,49,0,0" VerticalAlignment="Top" Width="346" Source="Images/batch.png"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Participant">
-                <Grid Background="#FFE5E5E5" Height="450" Width="800" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Grid Background="#FFE5E5E5" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <Button Content="Add Participant" HorizontalAlignment="Center" Margin="58,138,0,0" VerticalAlignment="Top" Width="194" Command="{Binding ShowAddParticipantCommand}"/>
-                        <Button Content="Search Participant" HorizontalAlignment="Center" Margin="58,186,0,0" VerticalAlignment="Top" Width="194" Command="{Binding ShowSearchParticipantCommand}"/>
-                    </Grid>
+                <Grid Background="White" Height="471" Width="796" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Button Content="Add Participant" HorizontalAlignment="Right" Margin="0,138,50,0" VerticalAlignment="Top" Width="365" Height="41" Command="{Binding ShowAddParticipantCommand}"
+                            FontSize="24" Background="CornflowerBlue" Foreground="White"/>
+                    <Button Content="Search/Update/Delete Participant" HorizontalAlignment="Right" Margin="0,186,50,0" VerticalAlignment="Top" Width="365" Height="41" Command="{Binding ShowSearchParticipantCommand}"
+                            FontSize="24" Background="CornflowerBlue" Foreground="White"/>
+                    <Image HorizontalAlignment="Left" Height="292" Margin="30,55,0,0" VerticalAlignment="Top" Width="326" Source="Images/participant.png"/>
                 </Grid>
             </TabItem>
         </TabControl>

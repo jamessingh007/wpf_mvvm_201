@@ -10,6 +10,12 @@ namespace WpfApp1.ViewModels
     {
         ExceptionHandling exObj = new ExceptionHandling();
 
+        public LoginViewModel()
+        {
+            WindowlVisible = Visibility.Visible;
+            BadCredentials = Visibility.Collapsed;
+        }
+
         private ICommand _loginCommand;
         public ICommand LoginCommmand
         {
@@ -25,18 +31,34 @@ namespace WpfApp1.ViewModels
 
         private void LoginSubmit()
         {
-            //MessageBox.Show(Password);
+            MessageBox.Show(Password);
             var adminCred = Common.Courses._dbcontext.ADMINs.ToList();
             if(adminCred.Count() > 0)
             {
                 foreach (ADMIN cred in adminCred)
                 {
-                    if(Username == cred.Username && Password == cred.Password)
+                    if (Username == cred.Username && Password == cred.Password)
                     {
                         MainWindow objMainWindow = new MainWindow();
+                        WindowlVisible = Visibility.Collapsed;
+                        BadCredentials = Visibility.Collapsed;
                         objMainWindow.Show();
                     }
+                    else
+                    {
+                        BadCredentials = Visibility.Visible;
+                    }
                 }
+            }
+        }
+
+        
+
+        private void CloseWindow(Window window)
+        {
+            if (window != null)
+            {
+                window.Close();
             }
         }
 

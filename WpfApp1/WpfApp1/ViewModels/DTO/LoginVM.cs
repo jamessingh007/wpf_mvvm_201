@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows;
 
 namespace WpfApp1.ViewModels.DTO
 {
@@ -33,12 +34,52 @@ namespace WpfApp1.ViewModels.DTO
             }
             set
             {
-                objadmin.Password += EnteredKey;
+                if(EnteredKey == "")
+                {
+                    objadmin.Password = "";
+                }
+                else
+                {
+                    if (EnteredKey.Contains("*"))
+                    {
+                        objadmin.Password = objadmin.Password.Substring(0, objadmin.Password.Length - 1);
+                    }
+                    if(!EnteredKey.Contains("*"))
+                    {
+                        objadmin.Password += EnteredKey;
+                    }
+                }
                 OnPropertyChanged("Password");
             }
         }
 
-       
+        private Visibility _WindowlVisible;
+        public Visibility WindowlVisible
+        {
+            get
+            {
+                return _WindowlVisible;
+            }
+            set
+            {
+                _WindowlVisible = value;
+                OnPropertyChanged("WindowlVisible");
+            }
+        }
+
+        private Visibility _BadCredentials;
+        public Visibility BadCredentials
+        {
+            get
+            {
+                return _BadCredentials;
+            }
+            set
+            {
+                _BadCredentials = value;
+                OnPropertyChanged("BadCredentials");
+            }
+        }
 
 
         #region INotifyPropertyChanged members

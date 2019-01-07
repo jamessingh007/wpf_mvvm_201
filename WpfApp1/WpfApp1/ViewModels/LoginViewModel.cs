@@ -31,7 +31,6 @@ namespace WpfApp1.ViewModels
 
         private void LoginSubmit()
         {
-            MessageBox.Show(Password);
             var adminCred = Common.Courses._dbcontext.ADMINs.ToList();
             if(adminCred.Count() > 0)
             {
